@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   buttonPressed(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SelectRegion()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchList()));
   }
 
 }
