@@ -1,131 +1,154 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru_flutter/info_display.dart';
 
-class SelectRegion extends StatefulWidget {
+class SearchList extends StatefulWidget {
+  SearchList({Key key}) : super(key: key);
   @override
-  _SelectRegion createState() => _SelectRegion();
+  _SearchListState createState() => _SearchListState();
 }
 
-class _SelectRegion extends State<SelectRegion> {
-  var _searchEdit = TextEditingController();
-
-  bool _isSearch = true;
+class _SearchListState extends State<SearchList> {
+  Widget appBarTitle = Text("Search Smaple", style: TextStyle(color: Colors.white));
+  Icon actionIcon = Icon(Icons.search, color: Colors.white,);
+  final key = GlobalKey<ScaffoldState>();
+  final TextEditingController _searchQuery = TextEditingController();
+  List<String> _list;
+  bool _isSearching;
   String _searchText = "";
 
-  List<String> _regionListItems;
-  List<String> _searchListItems;
-
-  @override
-  void initState() {
-    super.initState();
-    _regionListItems = List<String>();
-    _regionListItems = [
-      "foo",
-      "bar",
-      "foobar",
-      "hoge",
-      "hogehoge",
-    ];
-    _regionListItems.sort();
-  }
-
-  _SelectRegion() {
-    _searchEdit.addListener(() {
-      if (_searchEdit.text.isEmpty) {
+  _SearchListState() {
+    _searchQuery.addListener(() {
+      if (_searchQuery.text.isEmpty) {
         setState(() {
-          _isSearch = true;
+          _isSearching = false;
           _searchText = "";
         });
       }
       else {
         setState(() {
-          _isSearch = false;
-          _searchText = _searchEdit.text;
+          _isSearching = true;
+          _searchText = _searchQuery.text;
         });
       }
     });
   }
 
   @override
+  initState() {
+    super.initState();
+    _isSearching = false;
+    init();
+  }
+
+  init() {
+    _list = [
+      "foo",
+      "bar",
+      "foobar",
+      "hoge",
+      "hogehoge",
+      "hogepoyo"
+    ];
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("地域を選択してください"),
-      ),
-      body: Container(
-        margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-          child: Column(
-            children: <Widget>[
-              _searchBox(),
-              _isSearch ? _listView() : _searchListView(),
-              Padding(
-                padding: EdgeInsets.fromLTRB(24.0, 50.0, 24.0, 50.0),
-              )
-            ],
-          ),
+    return  Scaffold(
+      key: key,
+      appBar: buildBar(context),
+      body: ListView(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        children: _isSearching ? _buildSearchList() : _buildList(),
       ),
     );
   }
 
-  Widget _searchBox() {
-    return Container(
-      decoration: BoxDecoration(border: Border.all(width: 1.0)),
-      child: TextField(
-        controller: _searchEdit,
-        decoration: InputDecoration(
-          hintText: "Search",
-          hintStyle: TextStyle(color: Colors.grey[300]),
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
+  List<ChildItem> _buildList() {
+    return _list.map((contact) => new ChildItem(contact)).toList();
   }
 
-  Widget _listView() {
-    return Flexible(
-      child: ListView.builder(
-        itemCount: _regionListItems.length,
-        itemBuilder: (BuildContext context, int index){
-          return RaisedButton(
-                key:null,
-                onPressed:() {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(_regionListItems[index])));
-                },
-                color: Color(0xFFe0e0e0),
-                child: Text("${_regionListItems[index]}"),
-              );
-        },
-      ),
-    );
-  }
-
-  Widget _searchListView() {
-    _searchListItems = List<String>();
-    for (int i = 0; i < _regionListItems.length; i++) {
-      var item = _regionListItems[i];
-
-      if (item.toLowerCase().contains(_searchText.toLowerCase())) {
-        _searchListItems.add(item);
-      }
+  List<ChildItem> _buildSearchList() {
+    if (_searchText.isEmpty) {
+      return _list.map((contact) => ChildItem(contact)).toList();
     }
-    return _searchAddList();
+    else {
+      List<String> _searchList = List();
+      for (int i = 0; i < _list.length; i++) {
+        String name = _list.elementAt(i);
+        if (name.toLowerCase().contains(_searchText.toLowerCase())) {
+          _searchList.add(name);
+        }
+      }
+      return _searchList.map((contact) => ChildItem(contact)).toList();
+    }
   }
 
-  Widget _searchAddList() {
-    return Flexible(
-      child: ListView.builder(
-        itemCount: _searchListItems.length,
-        itemBuilder: (BuildContext context, int index) {
-          return RaisedButton(
-            key:null,
-            onPressed:() {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(_regionListItems[index])));
-            },
-            color: Color(0xFFe0e0e0),
-            child: Text("${_regionListItems[index]}"),
-          );
-        },
-      ),
+  Widget buildBar(BuildContext context) {
+    return AppBar(
+      centerTitle: true,
+      title: appBarTitle,
+      actions: <Widget>[
+        IconButton(icon: actionIcon, onPressed: () {
+          setState(() {
+            if (this.actionIcon.icon == Icons.search) {
+              this.actionIcon = Icon(Icons.close, color: Colors.white,);
+              this.appBarTitle = TextField(
+                controller: _searchQuery,
+                style: TextStyle(
+                  color: Colors.white
+                ),
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search, color: Colors.white,),
+                  hintText: "Search...",
+                  hintStyle: TextStyle(color: Colors.white)
+                ),
+              );
+              _handleSearchStart();
+            }
+            else {
+              _handleSearchEnd();
+            }
+          });
+        },)
+      ],
     );
+  }
+
+  _handleSearchStart() {
+    setState(() {
+      _isSearching = true;
+    });
+  }
+
+  _handleSearchEnd() {
+    setState(() {
+      this.actionIcon = Icon(Icons.search, color: Colors.white);
+      this.appBarTitle = Text("Search Sample", style: new TextStyle(color: Colors.white));
+      _isSearching = false;
+      _searchQuery.clear();
+    });
+  }
+}
+
+class ChildItem extends StatelessWidget {
+  final String name;
+  ChildItem(this.name);
+  @override
+  Widget build(BuildContext context) {
+    return new ListTile(title: RaisedButton(
+        key: null,
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(this.name)));
+        },
+        color: Color(0xFFe0e0e0),
+        child:
+        Text(
+          this.name,
+          style: TextStyle(fontSize:18.0,
+              color: Color(0xFF000000),
+              fontWeight: FontWeight.w600,
+              fontFamily: "Roboto"),
+        )
+    ));
   }
 }
