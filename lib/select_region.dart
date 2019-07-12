@@ -8,7 +8,7 @@ class SearchList extends StatefulWidget {
 }
 
 class _SearchListState extends State<SearchList> {
-  Widget appBarTitle = Text("Search Smaple", style: TextStyle(color: Colors.white));
+  Widget appBarTitle = Text("地域リスト", style: TextStyle(color: Colors.white));
   Icon actionIcon = Icon(Icons.search, color: Colors.white,);
   final key = GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery = TextEditingController();
@@ -47,7 +47,12 @@ class _SearchListState extends State<SearchList> {
       "foobar",
       "hoge",
       "hogehoge",
-      "hogepoyo"
+      "hogepoyo",
+      "nyon",
+      "nyonnyon",
+      "nya-n",
+      "kusa",
+      "uhehe"
     ];
   }
 
@@ -87,6 +92,7 @@ class _SearchListState extends State<SearchList> {
     return AppBar(
       centerTitle: true,
       title: appBarTitle,
+      backgroundColor: Colors.green[400],
       actions: <Widget>[
         IconButton(icon: actionIcon, onPressed: () {
           setState(() {
@@ -99,7 +105,7 @@ class _SearchListState extends State<SearchList> {
                 ),
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search, color: Colors.white,),
-                  hintText: "Search...",
+                  hintText: "地域を検索...",
                   hintStyle: TextStyle(color: Colors.white)
                 ),
               );
@@ -123,7 +129,7 @@ class _SearchListState extends State<SearchList> {
   _handleSearchEnd() {
     setState(() {
       this.actionIcon = Icon(Icons.search, color: Colors.white);
-      this.appBarTitle = Text("Search Sample", style: new TextStyle(color: Colors.white));
+      this.appBarTitle = Text("地域リスト", style: TextStyle(color: Colors.white));
       _isSearching = false;
       _searchQuery.clear();
     });

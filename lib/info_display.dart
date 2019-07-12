@@ -11,12 +11,12 @@ class InfoDisplay extends StatefulWidget {
 }
 
 class _InfoDisplay extends State<InfoDisplay> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget._region),
+        backgroundColor: Colors.green[400],
       ),
       body:
       Column(
@@ -24,24 +24,30 @@ class _InfoDisplay extends State<InfoDisplay> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Align(
-                child: Text(
-                  "qWerty1",
-                  style: TextStyle(fontSize:16.0,
-                      color:  Color(0xFF000000),
-                      fontWeight: FontWeight.w200,
-                      fontFamily: "Roboto"),
-                )
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24.0, 13.0, 24.0, 24.0),
+            ),
+
+            Text("testtest"),
+
+            Image.asset(
+              'img/teapot.png',
+              fit:BoxFit.fitWidth,
+              width: 130.0,
+              height: 130.0,
             ),
 
             Container(
               child:
-              Image.network(
-                'https://github.com/flutter/website/blob/master/_includes/code/layout/lakes/images/lake.jpg?raw=true',
-                fit:BoxFit.fill,
+              Text(
+                "発生中",
+                style: TextStyle(fontSize:20.0,
+                    color: const Color(0xFF000000),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "Roboto"),
               ),
 
-              padding: EdgeInsets.all(0.0),
+              padding: const EdgeInsets.all(0.0),
               alignment: Alignment.center,
             )
           ]

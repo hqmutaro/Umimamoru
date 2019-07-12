@@ -12,10 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Generated App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: const Color(0xFF2196f3),
-        accentColor: const Color(0xFF2196f3),
-        canvasColor: const Color(0xFFfafafa),
+        primaryColor: Colors.green[400]
       ),
       home: MyHomePage(),
     );
@@ -33,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Umimamoru'),
+        title: Text('Umimamoru')
       ),
       body:
       Center(
