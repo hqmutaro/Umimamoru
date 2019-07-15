@@ -69,7 +69,7 @@ class _SearchListState extends State<SearchList> {
   }
 
   List<ChildItem> _buildList() {
-    return _list.map((contact) => new ChildItem(contact)).toList();
+    return _list.map((contact) => ChildItem(contact)).toList();
   }
 
   List<ChildItem> _buildSearchList() {
@@ -141,7 +141,7 @@ class ChildItem extends StatelessWidget {
   ChildItem(this.name);
   @override
   Widget build(BuildContext context) {
-    return new ListTile(title: RaisedButton(
+    return ListTile(title: RaisedButton(
         key: null,
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(this.name)));

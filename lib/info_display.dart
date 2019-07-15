@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 // ignore: must_be_immutable
 class InfoDisplay extends StatefulWidget {
@@ -11,49 +12,72 @@ class InfoDisplay extends StatefulWidget {
 }
 
 class _InfoDisplay extends State<InfoDisplay> {
+  List<Color> _colors = [
+    Colors.blue,
+    Colors.green,
+    Colors.red
+  ];
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> contents = <Widget>[];
+    contents.add(Padding(
+      padding: EdgeInsets.all(20.0),
+      child: Text(
+        "沖縄県名護市辺野古豊原\n${widget._region}ビーチのようす",
+        style: TextStyle(
+            fontSize: 25.0,
+            color: Color(0xFF000000),
+            fontWeight: FontWeight.w200,
+            fontFamily: "Roboto"),
+      ),
+    ));
+    contents.add(Image.network(
+      'https://avatars1.githubusercontent.com/u/39296516?s=460&v=4',
+      fit: BoxFit.fill,
+      width: 100.0,
+      height: 100.0,
+    ));
+    for (int i = 0; i < _colors.length; i++) {
+      Color c = _colors[i];
+      contents.add(ColorButton(color: c,));
+    }
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget._region),
-        backgroundColor: Colors.green[400],
-      ),
-      body:
-      Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24.0, 13.0, 24.0, 24.0),
-            ),
+        appBar: AppBar(
+          title: Text(widget._region),
+          backgroundColor: Colors.green[400],
+        ),
+        body: Container(
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+                children: contents
+          ),
+        ),
+      )
+    );
+  }
+}
 
-            Text("testtest"),
+class ColorButton extends StatelessWidget {
+  final Color color;
+  ColorButton({Key key, this.color}) : super(key: key);
 
-            Image.asset(
-              'img/teapot.png',
-              fit:BoxFit.fitWidth,
-              width: 130.0,
-              height: 130.0,
-            ),
-
-            Container(
-              child:
-              Text(
-                "発生中",
-                style: TextStyle(fontSize:20.0,
-                    color: const Color(0xFF000000),
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "Roboto"),
-              ),
-
-              padding: const EdgeInsets.all(0.0),
-              alignment: Alignment.center,
-            )
-          ]
-
-      ),
-
+  @override
+  Widget build(BuildContext context) {
+    return new RawMaterialButton(
+        onPressed: null,
+        constraints: BoxConstraints(minWidth: 60.0, minHeight: 50.0),
+        child: Container(
+          margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+          width: 50.0,
+          height: 50.0,
+          decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+              border: Border.all(color: Colors.white, width: 0.0)
+          ),
+        )
     );
   }
 }
