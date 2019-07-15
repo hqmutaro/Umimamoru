@@ -69,12 +69,12 @@ class _SearchListState extends State<SearchList> {
   }
 
   List<ChildItem> _buildList() {
-    return _list.map((contact) => ChildItem(contact)).toList();
+    return _list.map((contact) => ChildItem(contact, this)).toList();
   }
 
   List<ChildItem> _buildSearchList() {
     if (_searchText.isEmpty) {
-      return _list.map((contact) => ChildItem(contact)).toList();
+      return _list.map((contact) => ChildItem(contact, this)).toList();
     }
     else {
       List<String> _searchList = List();
@@ -84,7 +84,7 @@ class _SearchListState extends State<SearchList> {
           _searchList.add(name);
         }
       }
-      return _searchList.map((contact) => ChildItem(contact)).toList();
+      return _searchList.map((contact) => ChildItem(contact, this)).toList();
     }
   }
 
@@ -138,19 +138,21 @@ class _SearchListState extends State<SearchList> {
 
 class ChildItem extends StatelessWidget {
   final String name;
-  ChildItem(this.name);
+  _SearchListState _searchListState;
+  ChildItem(this.name, this._searchListState);
   @override
   Widget build(BuildContext context) {
     return ListTile(title: RaisedButton(
         key: null,
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(this.name)));
+          _searchListState._handleSearchEnd();
         },
         color: Color(0xFFe0e0e0),
         child:
         Text(
           this.name,
-          style: TextStyle(fontSize:18.0,
+          style: TextStyle(fontSize:25.0,
               color: Color(0xFF000000),
               fontWeight: FontWeight.w600,
               fontFamily: "Roboto"),
