@@ -12,10 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Generated App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: const Color(0xFF2196f3),
-        accentColor: const Color(0xFF2196f3),
-        canvasColor: const Color(0xFFfafafa),
+        primaryColor: Colors.green[400]
       ),
       home: MyHomePage(),
     );
@@ -33,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Umimamoru'),
+        title: Text('Umimamoru')
       ),
       body:
       Center(
@@ -46,7 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: EdgeInsets.fromLTRB(24.0, 50.0, 24.0, 50.0),
               ),
-
               Text(
                 "うみまもる",
                 style: TextStyle(fontSize:49.0,
@@ -54,28 +50,23 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontWeight: FontWeight.w500,
                     fontFamily: "Roboto"),
               ),
-
               Padding(
                 padding: EdgeInsets.all(24.0),
               ),
-
               RaisedButton(key:null, onPressed:buttonPressed,
                   color: Color(0xFFe0e0e0),
                   child:
                   Text(
                     "地域を選択する",
-                    style: TextStyle(fontSize:18.0,
+                    style: TextStyle(fontSize:25.0,
                         color: Color(0xFF000000),
                         fontWeight: FontWeight.w600,
                         fontFamily: "Roboto"),
                   )
               )
             ]
-
         ),
-
       ),
-
     );
   }
 
