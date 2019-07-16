@@ -193,6 +193,11 @@ class _InfoDisplay extends State<InfoDisplay> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget._region),
+          leading: IconButton(
+            icon: Icon(Icons.navigate_before),
+            color: Colors.white,
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           backgroundColor: Colors.green[400],
         ),
         body: Container(
