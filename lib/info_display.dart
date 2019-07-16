@@ -171,20 +171,26 @@ class _InfoDisplay extends State<InfoDisplay> {
     );
     test_data.forEach((cone, status) => contents.add(
         Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           elevation: 4.0,
           margin: EdgeInsets.all(16.0),
           child: Row(
             children: <Widget>[
               ColorButton(color: _colors[status["state"]], width: 30.0, height: 30.0,),
-              Text(
-                "${cone}\n" +
-                    "波の速さ ${status["wave.speed"]}m/s\n" +
-                    "今月の離岸流発生回数: ${status["count.occur"]}回\n",
-                style: TextStyle(
-                    fontSize: 20.0,
-                    color: Color(0xFF000000),
-                    fontWeight: FontWeight.w200,
-                    fontFamily: "Roboto"),
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                  child: Text(
+                    "${cone}\n" +
+                        "波の速さ ${status["wave.speed"]}m/s\n" +
+                        "今月の離岸流発生回数: ${status["count.occur"]}回\n",
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        color: Color(0xFF000000),
+                        fontWeight: FontWeight.w200,
+                        fontFamily: "Roboto"),
+                  ),
               )
             ],
           ),
@@ -192,7 +198,17 @@ class _InfoDisplay extends State<InfoDisplay> {
     ));
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget._region),
+          title: Text(
+              widget._region,
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.navigate_before),
+            color: Colors.white,
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           backgroundColor: Colors.green[400],
         ),
         body: Container(

@@ -89,34 +89,41 @@ class _SearchListState extends State<SearchList> {
   }
 
   Widget buildBar(BuildContext context) {
+    List<Widget> widget = <Widget>[
+      IconButton(icon: actionIcon, onPressed: () {
+        setState(() {
+          if (this.actionIcon.icon == Icons.search) {
+            this.actionIcon = Icon(Icons.close, color: Colors.white,);
+            this.appBarTitle = TextField(
+              controller: _searchQuery,
+              style: TextStyle(
+                  color: Colors.white
+              ),
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search, color: Colors.white,),
+                  hintText: "地域を検索...",
+                  hintStyle: TextStyle(color: Colors.white)
+              ),
+            );
+            _handleSearchStart();
+          }
+          else {
+            _handleSearchEnd();
+          }
+        });
+      })
+    ];
+    
     return AppBar(
       centerTitle: true,
       title: appBarTitle,
       backgroundColor: Colors.green[400],
-      actions: <Widget>[
-        IconButton(icon: actionIcon, onPressed: () {
-          setState(() {
-            if (this.actionIcon.icon == Icons.search) {
-              this.actionIcon = Icon(Icons.close, color: Colors.white,);
-              this.appBarTitle = TextField(
-                controller: _searchQuery,
-                style: TextStyle(
-                  color: Colors.white
-                ),
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search, color: Colors.white,),
-                  hintText: "地域を検索...",
-                  hintStyle: TextStyle(color: Colors.white)
-                ),
-              );
-              _handleSearchStart();
-            }
-            else {
-              _handleSearchEnd();
-            }
-          });
-        },)
-      ],
+      actions: widget,
+      leading: IconButton(
+        icon: Icon(Icons.navigate_before),
+        color: Colors.white,
+        onPressed: () => Navigator.of(context).pop(),
+      ),
     );
   }
 
@@ -142,21 +149,24 @@ class ChildItem extends StatelessWidget {
   ChildItem(this.name, this._searchListState);
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: RaisedButton(
-        key: null,
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(this.name)));
-          _searchListState._handleSearchEnd();
-        },
-        color: Color(0xFFe0e0e0),
-        child:
-        Text(
-          this.name,
-          style: TextStyle(fontSize:25.0,
-              color: Color(0xFF000000),
-              fontWeight: FontWeight.w600,
-              fontFamily: "Roboto"),
-        )
-    ));
+    return Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 2.0,
+        margin: EdgeInsets.all(8.0),
+        child: ListTile(
+          leading: Icon(Icons.beach_access, color: Colors.pinkAccent,),
+          title: Text(
+              "${this.name}",
+            style: TextStyle(
+              fontSize: 25.0
+            ),
+          ),
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(this.name)));
+            _searchListState._handleSearchEnd();
+          },
+        ));
   }
 }
