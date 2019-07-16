@@ -150,6 +150,9 @@ class ChildItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
         elevation: 2.0,
         margin: EdgeInsets.all(8.0),
         child: ListTile(
