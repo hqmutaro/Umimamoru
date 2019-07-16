@@ -30,7 +30,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Umimamoru')
+        title: Text(
+          "Umimamoru",
+          style: TextStyle(
+            color: Colors.white
+          ),
+        ),
       ),
       body:
       Center(
