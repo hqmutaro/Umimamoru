@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:umimamoru_flutter/widget/ColorButton.dart';
+import 'package:umimamoru_flutter/widget/SpaceBox.dart';
 
 // ignore: must_be_immutable
 class InfoDisplay extends StatefulWidget {
+  String _beach;
   String _region;
 
-  InfoDisplay(this._region);
+  InfoDisplay(this._beach, this._region);
 
   @override
   _InfoDisplay createState() => _InfoDisplay();
@@ -56,20 +59,21 @@ class _InfoDisplay extends State<InfoDisplay> {
     contents.add(Padding(
       padding: EdgeInsets.all(20.0),
       child: Text(
-        "沖縄県名護市辺野古豊原\n${widget._region}ビーチの波のようす",
-        style: TextStyle(
-            fontSize: 25.0,
-            color: Color(0xFF000000),
-            fontWeight: FontWeight.w200,
-            fontFamily: "Roboto"),
+        "${widget._region}\n" +
+          "${widget._beach}の波のようす",
+        style: TextStyle(fontSize: 23.0, fontWeight: FontWeight.bold),
+      )
+    ));
+    contents.add(
+      Container(
+        child: Image.asset(
+          'images/rigan_bar.png',
+          fit:BoxFit.fitWidth,
+        ),
+        padding: EdgeInsets.all(0.0),
+        alignment: Alignment.center,
       ),
-    ));
-    contents.add(Image.network(
-      'https://avatars1.githubusercontent.com/u/39296516?s=460&v=4',
-      fit: BoxFit.fill,
-      width: 100.0,
-      height: 100.0,
-    ));
+    );
     contents.add(
         Row(
           children: <Widget>[
@@ -199,7 +203,7 @@ class _InfoDisplay extends State<InfoDisplay> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-              widget._region,
+              widget._beach,
             style: TextStyle(
               color: Colors.white
             ),
@@ -222,40 +226,4 @@ class _InfoDisplay extends State<InfoDisplay> {
         )
     );
   }
-}
-
-class ColorButton extends StatelessWidget {
-  final Color color;
-  final double width;
-  final double height;
-
-  final Color border_color;
-  final double border_width;
-
-  ColorButton({Key key, this.color, this.width, this.height, this.border_color = Colors.white, this.border_width = 0.0}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return new RawMaterialButton(
-        onPressed: null,
-        constraints: BoxConstraints(minWidth: 0.0, minHeight: 0.0),
-        child: Container(
-          margin: EdgeInsets.only(top: 3.0, bottom: 3.0, left: 1.0, right: 1.0),
-          width: this.width,
-          height: this.height,
-          decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.all(Radius.circular(25.0)),
-              border: Border.all(color: this.border_color, width: this.border_width)
-          ),
-        )
-    );
-  }
-}
-
-class SpaceBox extends SizedBox {
-  SpaceBox({double width = 8, double height = 8}) : super(width: width, height: height);
-
-  SpaceBox.width([double value = 8]) : super(width: value);
-  SpaceBox.height([double value = 8]) : super(height: value);
 }

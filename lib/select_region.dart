@@ -13,6 +13,7 @@ class _SearchListState extends State<SearchList> {
   final key = GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery = TextEditingController();
   List<String> _list;
+  Map<String, String> _region;
   bool _isSearching;
   String _searchText = "";
 
@@ -41,19 +42,20 @@ class _SearchListState extends State<SearchList> {
   }
 
   init() {
-    _list = [
-      "foo",
-      "bar",
-      "foobar",
-      "hoge",
-      "hogehoge",
-      "hogepoyo",
-      "nyon",
-      "nyonnyon",
-      "nya-n",
-      "kusa",
-      "uhehe"
-    ];
+    _region = {
+      "アイウエオビーチ" : "あいうえお市辺野古",
+      "カキクケコビーチ" : "かきくけこ市辺野古",
+      "サシスセソビーチ" : "さしすせそ市辺野古",
+      "タチツテトビーチ" : "たちつてと市辺野古",
+      "ナニヌネノビーチ" : "なにぬねの市辺野古",
+      "ハヒフヘホビーチ" : "はひふへほ市辺野古",
+      "マミムメモビーチ" : "まみむめも市辺野古",
+      "ワイウエヲビーチ" : "わいうえを市辺野古",
+      "ニャニャニャニャニャンビーチ" : "にゃにゃにゃにゃにゃ市辺野古",
+      "ニャーンビーチ" : "にゃーん市辺野古",
+      "ニョニョニョニョニョビーチ" : "にょにょにょにょにょ市辺野古"
+    };
+    _list = _region.keys.toList();
   }
 
   @override
@@ -61,20 +63,22 @@ class _SearchListState extends State<SearchList> {
     return  Scaffold(
       key: key,
       appBar: buildBar(context),
-      body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        children: _isSearching ? _buildSearchList() : _buildList(),
-      ),
+      body: Container(
+        child: ListView(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          children: _isSearching ? _buildSearchList() : _buildList(),
+        ),
+      )
     );
   }
 
   List<ChildItem> _buildList() {
-    return _list.map((contact) => ChildItem(contact, this)).toList();
+    return _list.map((contact) => ChildItem(contact, _region[contact], this)).toList();
   }
 
   List<ChildItem> _buildSearchList() {
     if (_searchText.isEmpty) {
-      return _list.map((contact) => ChildItem(contact, this)).toList();
+      return _list.map((contact) => ChildItem(contact, _region[contact], this)).toList();
     }
     else {
       List<String> _searchList = List();
@@ -84,7 +88,7 @@ class _SearchListState extends State<SearchList> {
           _searchList.add(name);
         }
       }
-      return _searchList.map((contact) => ChildItem(contact, this)).toList();
+      return _searchList.map((contact) => ChildItem(contact, _region[contact], this)).toList();
     }
   }
 
@@ -113,7 +117,7 @@ class _SearchListState extends State<SearchList> {
         });
       })
     ];
-    
+
     return AppBar(
       centerTitle: true,
       title: appBarTitle,
@@ -145,8 +149,9 @@ class _SearchListState extends State<SearchList> {
 
 class ChildItem extends StatelessWidget {
   final String name;
+  final String region;
   _SearchListState _searchListState;
-  ChildItem(this.name, this._searchListState);
+  ChildItem(this.name, this.region, this._searchListState);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -163,8 +168,9 @@ class ChildItem extends StatelessWidget {
               fontSize: 25.0
             ),
           ),
+          subtitle: Text("${this.region}"),
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(this.name)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(this.name, this.region)));
             _searchListState._handleSearchEnd();
           },
         ));
