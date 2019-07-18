@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/info_display.dart';
+import 'package:umimamoru_flutter/widget/child_item.dart';
+import 'package:umimamoru_flutter/presentation/selector/main.dart';
 
-class SearchList extends StatefulWidget {
-  SearchList({Key key}) : super(key: key);
-  @override
-  _SearchListState createState() => _SearchListState();
-}
-
-class _SearchListState extends State<SearchList> {
+class SearchListState extends State<SearchList> {
   Widget appBarTitle = Text("地域リスト", style: TextStyle(color: Colors.white));
   Icon actionIcon = Icon(Icons.search, color: Colors.white,);
   final key = GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery = TextEditingController();
   List<String> _list;
+  Map<String, String> _region;
   bool _isSearching;
   String _searchText = "";
 
-  _SearchListState() {
+  SearchListState() {
     _searchQuery.addListener(() {
       if (_searchQuery.text.isEmpty) {
         setState(() {
@@ -41,40 +37,43 @@ class _SearchListState extends State<SearchList> {
   }
 
   init() {
-    _list = [
-      "foo",
-      "bar",
-      "foobar",
-      "hoge",
-      "hogehoge",
-      "hogepoyo",
-      "nyon",
-      "nyonnyon",
-      "nya-n",
-      "kusa",
-      "uhehe"
-    ];
+    _region = {
+      "アイウエオビーチ" : "あいうえお市辺野古",
+      "カキクケコビーチ" : "かきくけこ市辺野古",
+      "サシスセソビーチ" : "さしすせそ市辺野古",
+      "タチツテトビーチ" : "たちつてと市辺野古",
+      "ナニヌネノビーチ" : "なにぬねの市辺野古",
+      "ハヒフヘホビーチ" : "はひふへほ市辺野古",
+      "マミムメモビーチ" : "まみむめも市辺野古",
+      "ワイウエヲビーチ" : "わいうえを市辺野古",
+      "ニャニャニャニャニャンビーチ" : "にゃにゃにゃにゃにゃ市辺野古",
+      "ニャーンビーチ" : "にゃーん市辺野古",
+      "ニョニョニョニョニョビーチ" : "にょにょにょにょにょ市辺野古"
+    };
+    _list = _region.keys.toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      key: key,
-      appBar: buildBar(context),
-      body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        children: _isSearching ? _buildSearchList() : _buildList(),
-      ),
+        key: key,
+        appBar: buildBar(context),
+        body: Container(
+          child: ListView(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            children: _isSearching ? _buildSearchList() : _buildList(),
+          ),
+        )
     );
   }
 
   List<ChildItem> _buildList() {
-    return _list.map((contact) => ChildItem(contact, this)).toList();
+    return _list.map((contact) => ChildItem(contact, _region[contact], this)).toList();
   }
 
   List<ChildItem> _buildSearchList() {
     if (_searchText.isEmpty) {
-      return _list.map((contact) => ChildItem(contact, this)).toList();
+      return _list.map((contact) => ChildItem(contact, _region[contact], this)).toList();
     }
     else {
       List<String> _searchList = List();
@@ -84,7 +83,7 @@ class _SearchListState extends State<SearchList> {
           _searchList.add(name);
         }
       }
-      return _searchList.map((contact) => ChildItem(contact, this)).toList();
+      return _searchList.map((contact) => ChildItem(contact, _region[contact], this)).toList();
     }
   }
 
@@ -105,15 +104,15 @@ class _SearchListState extends State<SearchList> {
                   hintStyle: TextStyle(color: Colors.white)
               ),
             );
-            _handleSearchStart();
+            handleSearchStart();
           }
           else {
-            _handleSearchEnd();
+            handleSearchEnd();
           }
         });
       })
     ];
-    
+
     return AppBar(
       centerTitle: true,
       title: appBarTitle,
@@ -127,46 +126,18 @@ class _SearchListState extends State<SearchList> {
     );
   }
 
-  _handleSearchStart() {
+  handleSearchStart() {
     setState(() {
       _isSearching = true;
     });
   }
 
-  _handleSearchEnd() {
+  handleSearchEnd() {
     setState(() {
       this.actionIcon = Icon(Icons.search, color: Colors.white);
       this.appBarTitle = Text("地域リスト", style: TextStyle(color: Colors.white));
       _isSearching = false;
       _searchQuery.clear();
     });
-  }
-}
-
-class ChildItem extends StatelessWidget {
-  final String name;
-  _SearchListState _searchListState;
-  ChildItem(this.name, this._searchListState);
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        elevation: 2.0,
-        margin: EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: Icon(Icons.beach_access, color: Colors.pinkAccent,),
-          title: Text(
-              "${this.name}",
-            style: TextStyle(
-              fontSize: 25.0
-            ),
-          ),
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(this.name)));
-            _searchListState._handleSearchEnd();
-          },
-        ));
   }
 }
