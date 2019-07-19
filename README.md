@@ -1,6 +1,6 @@
 # umimamoru_flutter
 
-umimamoru flutter version
+Umimamoru App
 
 ## Getting Started
 

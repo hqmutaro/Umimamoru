@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/widget/ColorButton.dart';
-import 'package:umimamoru_flutter/widget/SpaceBox.dart';
+import 'package:umimamoru_flutter/widget/color_button.dart';
+import 'package:umimamoru_flutter/widget/space_box.dart';
 import 'package:umimamoru_flutter/presentation/info/main.dart' as info;
 
 class InfoDisplayState extends State<info.InfoDisplay> {
