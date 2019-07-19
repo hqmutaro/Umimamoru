@@ -1,7 +1,6 @@
-package umimamoruflutter.nitf.github.com.umimamoru_flutter
+package umimamoruflutter.nitf.github.com.umimamoru
 
 import android.os.Bundle
-
 import io.flutter.app.FlutterActivity
 import io.flutter.plugins.GeneratedPluginRegistrant
 
