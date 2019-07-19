@@ -1,5 +1,5 @@
 name: umimamoru_flutter
-description: umimamoru flutter version
+description: Umimamoru App
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -45,7 +45,8 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
-    - images/rigan_bar.png
+    - resources/rigan_bar.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
