@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/presentation/home/title.dart' as title;
+import 'package:umimamoru_flutter/presentation/title/title.dart' as title;
 
 class Home extends StatelessWidget {
 
