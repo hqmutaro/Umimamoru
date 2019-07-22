@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/presentation/home/title.dart' as title;
+import 'package:umimamoru_flutter/presentation/title/title.dart' as title;
 import 'package:umimamoru_flutter/presentation/selector/main.dart';
 
 class TitleState extends State<title.Title> {
@@ -35,15 +35,24 @@ class TitleState extends State<title.Title> {
               Padding(
                 padding: EdgeInsets.all(24.0),
               ),
-              RaisedButton(key:null, onPressed:buttonPressed,
-                  color: Color(0xFFe0e0e0),
-                  child:
-                  Text(
-                    "地域を選択する",
-                    style: TextStyle(fontSize:25.0,
-                        color: Color(0xFF000000),
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Roboto"),
+                  RaisedButton(key:null, onPressed:buttonPressed,
+                      color: Color(0xFFe0e0e0),
+                      child:
+                      Text(
+                        "地域を選択する",
+                        style: TextStyle(fontSize:25.0,
+                            color: Color(0xFF000000),
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Roboto"),
+                      )
+                  ),
+              Padding(
+                padding: EdgeInsets.only(top: 50, left: 250),
+                  child: IconButton(
+                    iconSize: 60,
+                    onPressed: null,
+                    color: Colors.blue,
+                    icon: Icon(Icons.settings),
                   )
               )
             ]
