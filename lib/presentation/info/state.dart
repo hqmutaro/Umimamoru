@@ -46,6 +46,30 @@ class InfoDisplayState extends State<info.InfoDisplay> {
     ];
 
     contents.add(Padding(
+        padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              width: 50,
+              height: 50,
+              child: FloatingActionButton(
+                onPressed: () => Navigator.of(context).pop(),
+                backgroundColor: Colors.lightGreen,
+                child: Icon(Icons.arrow_back),
+              ),
+            ),
+            SizedBox(width: 20),
+            Text(
+              "別のビーチに変更する",
+              style: TextStyle(
+                fontSize: 20.0
+              )
+            )
+          ],
+        )
+      )
+    );
+    contents.add(Padding(
         padding: EdgeInsets.all(20.0),
         child: Text(
           "${widget.region}\n" +
@@ -59,7 +83,6 @@ class InfoDisplayState extends State<info.InfoDisplay> {
           'images/rigan_bar.png',
           fit:BoxFit.fitWidth,
         ),
-        padding: EdgeInsets.all(0.0),
         alignment: Alignment.center,
       ),
     );
@@ -197,11 +220,7 @@ class InfoDisplayState extends State<info.InfoDisplay> {
                 color: Colors.white
             ),
           ),
-          leading: IconButton(
-            icon: Icon(Icons.navigate_before),
-            color: Colors.white,
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.green[400],
         ),
         body: Container(
