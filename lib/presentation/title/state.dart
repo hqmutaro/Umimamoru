@@ -47,7 +47,7 @@ class TitleState extends State<title.Title> {
                       )
                   ),
               Padding(
-                padding: EdgeInsets.only(top: 50, left: 250),
+                padding: EdgeInsets.only(top: 200, left: 250),
                   child: IconButton(
                     iconSize: 60,
                     onPressed: null,
