@@ -10,10 +10,24 @@ class InfoDisplayState extends State<info.InfoDisplay> {
     "fast" : Colors.red
   };
 
+  List<String> occur_cone = <String>[];
+  Map test_data = {};
+
+  updateTestData(Map updated_test_data) {
+    setState(() {
+      this.test_data = updated_test_data;
+    });
+  }
+
+  updateOccurCone(List<String> updated_occur_cone) {
+    setState(() {
+      this.occur_cone = updated_occur_cone;
+    });
+  }
+
   @override
-  Widget build(BuildContext context) {
-    var contents = <Widget>[];
-    var test_data = {
+  void initState() {
+    this.test_data = {
       "1番コーン" : {
         "state" : "calm",
         "wave.speed" : 3,
@@ -40,11 +54,16 @@ class InfoDisplayState extends State<info.InfoDisplay> {
         "count.occur" : 5
       },
     };
-    var occur_cone = [
+    this.occur_cone = [
       "4番コーン",
       "5番コーン"
     ];
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> contents = <Widget>[];
     contents.add(Padding(
         padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
         child: Row(
@@ -116,7 +135,7 @@ class InfoDisplayState extends State<info.InfoDisplay> {
               )
           ),
         )
-    )
+      )
     );
     contents.add(
         Row(
