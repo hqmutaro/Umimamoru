@@ -8,7 +8,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       title: 'Generated App',
       theme: ThemeData(
-          primaryColor: Colors.green[400]
+          primaryColor: Color(0xFF4CBBB4)
       ),
       home: title.Title(),
     );
