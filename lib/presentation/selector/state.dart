@@ -59,12 +59,46 @@ class SearchListState extends State<SearchList> {
         key: key,
         appBar: buildBar(context),
         body: Container(
-          child: ListView(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            children: _isSearching ? _buildSearchList() : _buildList(),
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 25.0),
+                      child: Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: FloatingActionButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              backgroundColor: Color(0xFF66BAB7),
+                              child: Icon(Icons.arrow_back),
+                            ),
+                          ),
+                          SizedBox(width: 20),
+                          Text(
+                              "ホームに戻る",
+                              style: TextStyle(
+                                  fontSize: 20.0
+                              )
+                          )
+                        ],
+                      )
+                  ),
+                  SizedBox(
+                    height: 510,
+                    child: ListView(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      children: _isSearching ? _buildSearchList() : _buildList(),
+                    ),
+                  )
+                ]
+            ),
           ),
         )
-    );
+        );
   }
 
   List<ChildItem> _buildList() {
@@ -116,13 +150,9 @@ class SearchListState extends State<SearchList> {
     return AppBar(
       centerTitle: true,
       title: appBarTitle,
-      backgroundColor: Colors.green[400],
-      actions: widget,
-      leading: IconButton(
-        icon: Icon(Icons.navigate_before),
-        color: Colors.white,
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      automaticallyImplyLeading: false,
+      backgroundColor: Color(0xFF4CBBB4),
+      actions: widget
     );
   }
 
