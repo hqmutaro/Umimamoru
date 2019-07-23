@@ -6,8 +6,8 @@ import 'package:umimamoru_flutter/presentation/info/main.dart' as info;
 class InfoDisplayState extends State<info.InfoDisplay> {
   Map<String, Color> _colors = {
     "calm" : Colors.blue,
-    "ordinarily" : Colors.green,
-    "fast" : Colors.red
+    "ordinarily" : Color(0xFF92D050),
+    "fast" : Color(0xFFEF8468)
   };
 
   List<String> occur_cone = <String>[];
@@ -73,7 +73,7 @@ class InfoDisplayState extends State<info.InfoDisplay> {
               height: 50,
               child: FloatingActionButton(
                 onPressed: () => Navigator.of(context).pop(),
-                backgroundColor: Colors.lightGreen,
+                backgroundColor: Color(0xFF66BAB7),
                 child: Icon(Icons.arrow_back),
               ),
             ),
@@ -108,7 +108,13 @@ class InfoDisplayState extends State<info.InfoDisplay> {
     contents.add(
         Row(
           children: <Widget>[
-            ColorButton(color: Colors.lightGreen, width: 20.0, height: 20.0, border_color: Colors.white, border_width: 30.0),
+            ColorButton(
+                color: Color(0xFF4DBBB4),
+                width: 20.0,
+                height: 20.0,
+                border_color: Colors.white,
+                border_width: 30.0
+            ),
             Text(
                 "離岸流が発生している場所",
                 style: TextStyle(
@@ -140,7 +146,13 @@ class InfoDisplayState extends State<info.InfoDisplay> {
     contents.add(
         Row(
           children: <Widget>[
-            ColorButton(color: Colors.lightGreen, width: 20.0, height: 20.0, border_color: Colors.white, border_width: 30.0),
+            ColorButton(
+                color: Color(0xFF4DBBB4),
+                width: 20.0,
+                height: 20.0,
+                border_color: Colors.white,
+                border_width: 30.0
+            ),
             Text(
                 "波のようす",
                 style: TextStyle(
@@ -168,7 +180,7 @@ class InfoDisplayState extends State<info.InfoDisplay> {
                   )
               ),
               SpaceBox.width(10),
-              ColorButton(color: Colors.red, width: 15.0, height: 15.0),
+              ColorButton(color: Color(0xFFEF8468), width: 15.0, height: 15.0),
               Text(
                   "速い",
                   textAlign: TextAlign.left,
@@ -179,7 +191,7 @@ class InfoDisplayState extends State<info.InfoDisplay> {
                   )
               ),
               SpaceBox.width(7),
-              ColorButton(color: Colors.green, width: 15.0, height: 15.0),
+              ColorButton(color: Color(0xFF92D050), width: 15.0, height: 15.0),
               Text(
                   "普通",
                   textAlign: TextAlign.left,
@@ -240,7 +252,7 @@ class InfoDisplayState extends State<info.InfoDisplay> {
             ),
           ),
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.green[400],
+          backgroundColor: Color(0xFF4CBBB4),
         ),
         body: Container(
           color: Colors.white,
