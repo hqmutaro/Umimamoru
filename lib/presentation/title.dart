@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/presentation/title/title.dart' as title;
 import 'package:umimamoru_flutter/presentation/selector/main.dart';
+import 'package:umimamoru_flutter/presentation/config/main.dart';
 
-class TitleState extends State<title.Title> {
+class Title extends StatefulWidget {
+  Title({Key key}) : super(key: key);
+  @override
+  _TitleState createState() => _TitleState();
+}
+
+class _TitleState extends State<Title> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +20,7 @@ class TitleState extends State<title.Title> {
           ),
         ),
       ),
-      body:
-      Center(
+      body: Center(
         child:
         Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -35,33 +40,37 @@ class TitleState extends State<title.Title> {
               Padding(
                 padding: EdgeInsets.all(24.0),
               ),
-                  RaisedButton(key:null, onPressed:buttonPressed,
-                      color: Color(0xFFe0e0e0),
-                      child:
-                      Text(
-                        "地域を選択する",
-                        style: TextStyle(fontSize:25.0,
-                            color: Color(0xFF000000),
-                            fontWeight: FontWeight.w600,
-                            fontFamily: "Roboto"),
-                      )
-                  ),
+              RaisedButton(key:null, onPressed:onSelectRegionButton,
+                  color: Color(0xFFe0e0e0),
+                  child:
+                  Text(
+                    "地域を選択する",
+                    style: TextStyle(fontSize:25.0,
+                        color: Color(0xFF000000),
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Roboto"),
+                  )
+              ),
               Padding(
-                padding: EdgeInsets.only(top: 200, left: 250),
+                  padding: EdgeInsets.only(top: 200, left: 250),
                   child: IconButton(
                     iconSize: 60,
-                    onPressed: null,
+                    onPressed: onConfigButton,
                     color: Colors.blue,
                     icon: Icon(Icons.settings),
                   )
               )
             ]
         ),
-      ),
+      )
     );
   }
 
-  buttonPressed(){
+  onConfigButton() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ConfigDisplay()));
+  }
+
+  onSelectRegionButton(){
     Navigator.push(context, MaterialPageRoute(builder: (context) => SearchList()));
   }
 }
