@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/widget/child_item.dart';
+import 'package:umimamoru_flutter/presentation/selector/child_item.dart';
 import 'package:umimamoru_flutter/presentation/selector/main.dart';
 
 class SearchListState extends State<SearchList> {
@@ -102,12 +102,12 @@ class SearchListState extends State<SearchList> {
   }
 
   List<ChildItem> _buildList() {
-    return _list.map((contact) => ChildItem(contact, _region[contact], this)).toList();
+    return _list.map((contact) => ChildItem(beach: contact, region: _region[contact], searchListState: this)).toList();
   }
 
   List<ChildItem> _buildSearchList() {
     if (_searchText.isEmpty) {
-      return _list.map((contact) => ChildItem(contact, _region[contact], this)).toList();
+      return _list.map((contact) => ChildItem(beach: contact, region: _region[contact], searchListState: this)).toList();
     }
     else {
       List<String> _searchList = List();
@@ -117,7 +117,7 @@ class SearchListState extends State<SearchList> {
           _searchList.add(name);
         }
       }
-      return _searchList.map((contact) => ChildItem(contact, _region[contact], this)).toList();
+      return _searchList.map((contact) => ChildItem(beach: contact, region: _region[contact], searchListState: this)).toList();
     }
   }
 
@@ -148,7 +148,6 @@ class SearchListState extends State<SearchList> {
     ];
 
     return AppBar(
-      centerTitle: true,
       title: appBarTitle,
       automaticallyImplyLeading: false,
       backgroundColor: Color(0xFF4CBBB4),

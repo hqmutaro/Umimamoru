@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/presentation/title/title.dart' as title;
+import 'package:umimamoru_flutter/presentation/title.dart' as title;
 
-class Home extends StatelessWidget {
+class App extends StatelessWidget {
+  const App({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Generated App',
       theme: ThemeData(
           primaryColor: Color(0xFF4CBBB4)
       ),
