@@ -4,9 +4,9 @@ import 'package:umimamoru_flutter/presentation/info/ring.dart';
 @immutable
 class Header extends StatelessWidget {
 
-  String title;
+  final String title;
 
-  Header({@required this.title}) : assert(title != null);
+  const Header({@required this.title}) : assert(title != null);
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/domain/wave_speed.dart';
 
 class StateColor extends StatelessWidget {
 
-  static final Map<String, Color> _colors = {
+  static const Map<String, Color> _colors = {
     "calm" : Colors.blue,
     "ordinarily" : Color(0xFF92D050),
     "fast" : Color(0xFFEF8468)

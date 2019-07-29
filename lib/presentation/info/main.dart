@@ -6,10 +6,8 @@ import 'package:umimamoru_flutter/presentation/info/state_image_bar.dart';
 import 'package:umimamoru_flutter/presentation/info/header.dart';
 import 'package:umimamoru_flutter/presentation/info/wave_level.dart';
 import 'package:umimamoru_flutter/presentation/info/occur_cone.dart';
-import 'package:umimamoru_flutter/presentation/info/cone_state.dart';
-
-// debug
-import 'package:umimamoru_flutter/domain/wave_speed.dart';
+import 'package:umimamoru_flutter/presentation/info/cone_state_view.dart';
+import 'package:umimamoru_flutter/application/repository/cone_state_repository.dart';
 
 @immutable
 class InfoDisplay extends StatefulWidget {
@@ -20,9 +18,7 @@ class InfoDisplay extends StatefulWidget {
   const InfoDisplay({
     @required this.beach,
     @required this.region
-  }) :
-  assert(beach != null),
-  assert(region != null);
+  }) : assert(beach != null), assert(region != null);
 
   @override
   _InfoDisplay createState() => _InfoDisplay();
@@ -33,42 +29,48 @@ class _InfoDisplay extends State<InfoDisplay> {
   List<String> cone;
   Map state;
   String image;
+  ConeStateRepository _coneStateRepository;
 
   @override
   void initState() {
+    super.initState();
+    init();
+  }
+
+  init() {
+    this._coneStateRepository = ConeStateRepository(widget.beach);
     this.cone = [
       "4番コーン",
       "5番コーン"
     ];
     this.state = {
       "1番コーン" : {
-        "state" : "calm",
-        "wave.speed" : 3,
-        "count.occur" : 2
-      },
-      "2番コーン" : {
-        "state" : "ordinarily",
-        "wave.speed" : 4,
-        "count.occur" : 3
-      },
-      "3番コーン" : {
-        "state" : "ordinarily",
-        "wave.speed" : 5,
-        "count.occur" : 4
-      },
-      "4番コーン" : {
-        "state" : "fast",
-        "wave.speed" : 6,
-        "count.occur" : 5
-      },
-      "5番コーン" : {
-        "state" : "fast",
-        "wave.speed" : 7,
-        "count.occur" : 5
-      },
+    "state" : "calm",
+    "wave.speed" : 3,
+    "count.occur" : 2
+    },
+    "2番コーン" : {
+    "state" : "ordinarily",
+    "wave.speed" : 4,
+    "count.occur" : 3
+    },
+    "3番コーン" : {
+    "state" : "ordinarily",
+    "wave.speed" : 5,
+    "count.occur" : 4
+    },
+    "4番コーン" : {
+    "state" : "fast",
+    "wave.speed" : 6,
+    "count.occur" : 5
+    },
+    "5番コーン" : {
+    "state" : "fast",
+    "wave.speed" : 7,
+    "count.occur" : 5
+    },
     };
     this.image = "rigan_bar";
-    super.initState();
   }
 
   updateState(Map updatedState) {
@@ -103,10 +105,10 @@ class _InfoDisplay extends State<InfoDisplay> {
                 BeachName(region: widget.region, beach: widget.beach),
                 StateImageBar(image: this.image),
                 Header(title: "離岸流が発生している場所"),
-                OccurCone(cone: this.cone),
+                OccurCone(cone: this.cone,),
                 Header(title: "波のようす"),
                 WaveLevel(),
-                ConeState(state: this.state)
+                ConeStateView(state: this.state)
               ]
           ),
         ),

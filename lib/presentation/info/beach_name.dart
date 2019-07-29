@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 @immutable
 class BeachName extends StatelessWidget {
 
-  String region;
-  String beach;
+  final String region;
+  final String beach;
 
-  BeachName({
+  const BeachName({
     @required this.region,
     @required this.beach,
-  }) : assert(region != null),
-        assert(beach != null);
+  }) : assert(region != null), assert(beach != null);
 
   @override
   Widget build(BuildContext context) {

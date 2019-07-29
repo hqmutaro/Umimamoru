@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru_flutter/presentation/info/main.dart';
-import 'package:umimamoru_flutter/presentation/selector/state.dart';
+import 'package:umimamoru_flutter/presentation/selector/main.dart';
 
 class ChildItem extends StatelessWidget {
 
@@ -19,14 +19,13 @@ class ChildItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
+    return Card(shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15.0)
+    ),
         elevation: 2.0,
         margin: EdgeInsets.all(8.0),
         child: ListTile(
-          leading: Icon(Icons.beach_access, color: Colors.pinkAccent,),
+          leading: Icon(Icons.beach_access, color: Colors.pinkAccent),
           title: Text(
             this.beach,
             style: TextStyle(
@@ -35,9 +34,12 @@ class ChildItem extends StatelessWidget {
           ),
           subtitle: Text("${this.region}"),
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoDisplay(beach: this.beach, region: this.region)));
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => InfoDisplay(beach: this.beach, region: this.region))
+            );
             searchListState.handleSearchEnd();
           },
-        ));
+        )
+    );
   }
 }

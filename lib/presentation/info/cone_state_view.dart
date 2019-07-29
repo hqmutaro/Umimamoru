@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:umimamoru_flutter/presentation/info/state/state_color.dart';
 
 @immutable
-class ConeState extends StatelessWidget {
+class ConeStateView extends StatelessWidget {
 
   Map state;
 
-  ConeState({@required this.state}) : assert(state != null);
+  ConeStateView({@required this.state}) : assert(state != null);
 
   @override
   Widget build(BuildContext context) {
