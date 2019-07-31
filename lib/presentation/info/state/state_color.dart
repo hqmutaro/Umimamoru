@@ -5,7 +5,8 @@ class StateColor extends StatelessWidget {
   static const Map<String, Color> _colors = {
     "calm" : Colors.blue,
     "ordinarily" : Color(0xFF92D050),
-    "fast" : Color(0xFFEF8468)
+    "fast" : Color(0xFFEF8468),
+    "null" : Colors.deepPurpleAccent
   };
 
   final String waveLevel;
