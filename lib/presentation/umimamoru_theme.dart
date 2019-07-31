@@ -7,7 +7,7 @@ class UmimamoruTheme extends StatelessWidget implements PreferredSizeWidget {
 
   const UmimamoruTheme({
     @required this.title,
-    this.widget = null,
+    this.widget,
     Key key
   }) : assert(title != null), super(key: key);
 

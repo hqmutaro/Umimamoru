@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class StateImageBar extends StatelessWidget {
 
-  String image;
+  final String image;
 
-  StateImageBar({@required this.image});
+  const StateImageBar({@required this.image});
 
   @override
   Widget build(BuildContext context) {

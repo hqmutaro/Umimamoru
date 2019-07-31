@@ -6,7 +6,7 @@ class Ring extends StatelessWidget {
   final double width;
   final double height;
 
-  Ring({
+  const Ring({
     Key key,
     @required this.color,
     @required this.width,

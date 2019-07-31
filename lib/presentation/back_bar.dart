@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class BackBar extends StatelessWidget with PreferredSizeWidget {
 
   String message;
+  List<Widget> action;
   BackBar({@required this.message}) : assert(message != null);
 
   @override

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 @immutable
 class OccurCone extends StatelessWidget {
 
-  List<String> cone;
+  final List<String> cone;
 
-  OccurCone({@required this.cone}) : assert(cone != null);
+  const OccurCone({@required this.cone}) : assert(cone != null);
 
   @override
   Widget build(BuildContext context) {
