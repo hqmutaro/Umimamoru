@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru_flutter/presentation/info/state/state_color.dart';
+import 'package:umimamoru_flutter/application/repository/cone_state_repository.dart';
+import 'package:umimamoru_flutter/domain/cone_state.dart';
+import 'package:umimamoru_flutter/domain/cone_state.dart';
 
 @immutable
 class ConeStateView extends StatelessWidget {
 
-  Map state;
+  String cone;
+  ConeState entity;
 
-  ConeStateView({@required this.state}) : assert(state != null);
+  ConeStateView({@required this.cone, @required this.entity}) : assert(cone != null), assert(entity != null);
 
   @override
   Widget build(BuildContext context) {
-    List<Card> widgets = [];
-
-    this.state.forEach((cone, status) => widgets.add(Card(
+    return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -20,13 +22,13 @@ class ConeStateView extends StatelessWidget {
       margin: EdgeInsets.all(16.0),
       child: Row(
         children: <Widget>[
-          StateColor(waveLevel: status["state"], width: 30.0, height: 30.0),
+          StateColor(waveLevel: entity.level, width: 30.0, height: 30.0),
           Padding(
             padding: EdgeInsets.all(5.0),
             child: Text(
-              "${cone}\n" +
-                  "波の速さ ${status["wave.speed"]}m/s\n" +
-                  "今月の離岸流発生回数: ${status["count.occur"]}回\n",
+              "${this.cone}\n" +
+                  "波の速さ ${entity.speed}m/s\n" +
+                  "今月の離岸流発生回数: ${entity.count_occur}回\n",
               style: TextStyle(
                   fontSize: 20.0,
                   color: Color(0xFF000000),
@@ -36,9 +38,6 @@ class ConeStateView extends StatelessWidget {
           )
         ],
       ),
-    )
-    )
     );
-    return Column(children: widgets);
   }
 }
