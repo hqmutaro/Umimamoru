@@ -4,12 +4,14 @@ import 'package:umimamoru_flutter/domain/wave_speed.dart';
 
 class ConeState implements Entity {
 
+  String _id;
   String _cone;
   String _level;
   double _speed;
   int _count_occur;
 
   ConeState(
+    @required this._id,
     @required this._cone,
     @required this._level,
     @required this._speed,
@@ -19,11 +21,13 @@ class ConeState implements Entity {
         assert(_speed != null),
         assert(_count_occur != null);
 
+  String get id => _id;
+
   String get cone => _cone;
 
   String get level => _level;
 
   double get speed => _speed;
 
-  int get occur_count => _count_occur;
+  int get count_occur => _count_occur;
 }
