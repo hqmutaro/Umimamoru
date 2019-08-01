@@ -14,9 +14,13 @@ class ConeStateViewList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> widgets = [];
     if (this.entities.isEmpty) {
+      List<Color> colors = [
+        Colors.lightBlue,
+        Colors.pinkAccent
+      ]; // 色は2つに抑えたほうがよい
       return Padding(
         padding: EdgeInsets.all(20.0),
-        child: Loader(colors: [Colors.red, Colors.blue], duration: Duration(milliseconds: 1000))
+        child: Loader(colors: colors, duration: Duration(milliseconds: 1500))
       );
     }
 
