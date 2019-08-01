@@ -117,7 +117,7 @@ class _InfoDisplay extends State<InfoDisplay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UmimamoruTheme(title: widget.beach),
+      appBar: UmimamoruTheme(title: Text(widget.beach, style: TextStyle(color: Colors.white),)),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
