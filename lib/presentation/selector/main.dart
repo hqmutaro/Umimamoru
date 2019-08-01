@@ -19,17 +19,19 @@ class SearchListState extends State<SearchList> {
   List<String> beach;
   bool isSearching;
 
+  final key = GlobalKey<ScaffoldState>();
   final TextEditingController searchQuery = TextEditingController();
   String searchText = "";
 
   Widget appBarTitle = Text("地域リスト", style: TextStyle(color: Colors.white));
   Icon actionIcon = Icon(Icons.search, color: Colors.white);
 
-  _SearchList() {
+  SearchListState() {
     searchQuery.addListener(() {
       if (this.searchQuery.text.isEmpty) {
         setState(() {
           this.isSearching = false;
+          this.searchText = "";
         });
       }
       else {
@@ -68,9 +70,28 @@ class SearchListState extends State<SearchList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UmimamoruTheme(title: "地域リスト",
-          widget: <Widget>[
-            IconButton(icon: actionIcon, onPressed: () {
+      key: key,
+      appBar: buildBar(context),
+      body: Container(
+        color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              BackBar(message: "ホームに戻る"),
+              ViewBeachList(isSearching: this.isSearching, searchListState: this)
+            ]
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildBar(BuildContext context) {
+    return UmimamoruTheme(
+        title: this.appBarTitle,
+        widget: <Widget>[
+          IconButton(icon: actionIcon, onPressed: () {
             setState(() {
               if (this.actionIcon.icon == Icons.search) {
                 this.actionIcon = Icon(Icons.close, color: Colors.white);
@@ -91,20 +112,8 @@ class SearchListState extends State<SearchList> {
                 handleSearchEnd();
               }
             });
-          })]
-      ),
-      body: Container(
-        color: Colors.white,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              BackBar(message: "ホームに戻る"),
-              ViewBeachList(isSearching: this.isSearching, searchListState: this)
-            ]
-          ),
-        ),
-      ),
+          })
+        ]
     );
   }
 

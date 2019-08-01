@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 class Loader extends StatefulWidget {
+
   final List<Color> colors;
   final Duration duration;
 
   Loader({this.colors, this.duration});
 
   @override
-  _LoaderState createState() =>
-      _LoaderState(this.colors, this.duration);
+  _LoaderState createState() => _LoaderState(this.colors, this.duration);
 }
 
 class _LoaderState extends State<Loader>
@@ -32,9 +32,7 @@ class _LoaderState extends State<Loader>
   void initState() {
     super.initState();
 
-
-
-    controller = new AnimationController(
+    controller = AnimationController(
       vsync: this,
       duration: duration,
     );
@@ -43,8 +41,7 @@ class _LoaderState extends State<Loader>
       tweenAnimations.add(ColorTween(begin: colors[i], end: colors[i + 1]));
     }
 
-    tweenAnimations
-        .add(ColorTween(begin: colors[colors.length - 1], end: colors[0]));
+    tweenAnimations.add(ColorTween(begin: colors[colors.length - 1], end: colors[0]));
 
     for (int i = 0; i < colors.length; i++) {
       Animation<Color> animation = tweenAnimations[i].animate(CurvedAnimation(

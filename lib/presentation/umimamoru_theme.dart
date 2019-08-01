@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class UmimamoruTheme extends StatelessWidget implements PreferredSizeWidget {
 
-  final String title;
+  final Widget title;
   final List<Widget> widget;
 
   const UmimamoruTheme({
@@ -17,12 +17,7 @@ class UmimamoruTheme extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: Color(0xFF4CBBB4),
       actions: this.widget,
-      title: Text(
-        this.title,
-        style: TextStyle(
-            color: Colors.white
-        ),
-      )
+      title: this.title
     );
   }
 

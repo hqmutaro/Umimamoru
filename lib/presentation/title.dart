@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru_flutter/presentation/selector/main.dart';
 import 'package:umimamoru_flutter/presentation/config/main.dart';
+import 'package:umimamoru_flutter/presentation/simple_round_icon_button.dart';
 
 class Title extends StatefulWidget {
   Title({Key key}) : super(key: key);
@@ -32,45 +33,50 @@ class _TitleState extends State<Title> {
               ),
               Text(
                 "うみまもる",
-                style: TextStyle(fontSize:49.0,
-                    color: Color(0xFF000000),
-                    fontWeight: FontWeight.w500,
+                style: TextStyle(
+                    fontSize:60.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w100,
                     fontFamily: "Roboto"),
               ),
               Padding(
                 padding: EdgeInsets.all(24.0),
               ),
-              RaisedButton(key:null, onPressed:onSelectRegionButton,
-                  color: Color(0xFFe0e0e0),
-                  child:
-                  Text(
-                    "地域を選択する",
-                    style: TextStyle(fontSize:25.0,
-                        color: Color(0xFF000000),
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Roboto"),
-                  )
+              SimpleRoundIconButton(
+                backgroundColor: Colors.lightBlue,
+                buttonText: "地域を選択する",
+                textColor: Colors.white,
+                textSize: 20.0,
+                icon: Icon(Icons.arrow_forward),
+                iconColor: Colors.lightBlue,
+                iconAlignment: Alignment.centerRight,
+                onPressed: onSelectRegionButton(),
               ),
-              Padding(
-                  padding: EdgeInsets.only(top: 200, left: 250),
-                  child: IconButton(
-                    iconSize: 60,
-                    onPressed: onConfigButton,
-                    color: Colors.blue,
-                    icon: Icon(Icons.settings),
-                  )
-              )
+              SimpleRoundIconButton(
+                backgroundColor: Colors.deepPurple,
+                buttonText: "設定",
+                textColor: Colors.white,
+                textSize: 20.0,
+                icon: Icon(Icons.settings),
+                iconColor: Colors.blueGrey,
+                iconAlignment: Alignment.centerRight,
+                onPressed: onConfigButton(),
+              ),
             ]
         ),
       )
     );
   }
 
-  onConfigButton() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ConfigDisplay()));
+  Function onConfigButton() {
+    return () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ConfigDisplay()));
+    };
   }
 
-  onSelectRegionButton(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchList()));
+  Function onSelectRegionButton(){
+    return () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => SearchList()));
+    };
   }
 }
