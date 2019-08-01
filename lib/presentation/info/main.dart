@@ -100,12 +100,18 @@ class _InfoDisplay extends State<InfoDisplay> {
 
   updateEntities() {
     Map<String, Entity> updatedEntities = {};
+    var stream = new Stream.periodic(const Duration(seconds: 5), (count) {
       this.data.forEach((cone, data) =>
-          updatedEntities[cone] = ConeState(widget.beach, cone, data["level"], data["wave.speed"], data["count.occur"])
+      updatedEntities[cone] = ConeState(widget.beach, cone, data["level"], data["wave.speed"], data["count.occur"])
       );
-      setState(() {
-        this.entities = updatedEntities;
-      });
+    });
+    stream.listen((result) {
+      if (this.mounted) {
+        setState(() {
+          this.entities = updatedEntities;
+        });
+      }
+    });
   }
 
   @override
