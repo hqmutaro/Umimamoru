@@ -19,9 +19,10 @@ class ChildItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(15.0)
-    ),
+    return Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0)
+        ),
         elevation: 2.0,
         margin: EdgeInsets.all(8.0),
         child: ListTile(
@@ -29,17 +30,19 @@ class ChildItem extends StatelessWidget {
           title: Text(
             this.beach,
             style: TextStyle(
-                fontSize: 25.0
+              fontSize: 25.0,
+              color: Colors.black
             ),
           ),
-          subtitle: Text("${this.region}"),
+          subtitle: Text("${this.region}", style: TextStyle(color: Colors.grey)),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(
                 builder: (context) => InfoDisplay(beach: this.beach, region: this.region))
             );
             searchListState.handleSearchEnd();
           },
-        )
+        ),
+      color: Colors.white,
     );
   }
 }
