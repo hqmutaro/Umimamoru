@@ -17,7 +17,7 @@ class UmimamoruTheme extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: Color(0xFF4CBBB4),
       actions: this.widget,
-      title: this.title
+      title: this.title,
     );
   }
 

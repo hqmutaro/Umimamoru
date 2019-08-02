@@ -13,9 +13,9 @@ class ViewBeachList extends StatelessWidget {
     return SizedBox(
       height: 510,
       child: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        children: this.isSearching ? searchListState.buildSearchList() : searchListState.buildList(),
-      ),
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          children: this.isSearching ? searchListState.buildSearchList() : searchListState.buildList(),
+        ),
     );
   }
 }
