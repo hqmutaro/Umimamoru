@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:umimamoru_flutter/presentation/umimamoru_theme.dart';
 import 'package:umimamoru_flutter/presentation/back_bar.dart';
 import 'package:umimamoru_flutter/presentation/info/beach_name.dart';
@@ -8,7 +9,7 @@ import 'package:umimamoru_flutter/presentation/info/wave_level.dart';
 import 'package:umimamoru_flutter/presentation/info/occur_cone.dart';
 import 'package:umimamoru_flutter/presentation/info/cone_state_view.dart';
 import 'package:umimamoru_flutter/application/repository/cone_state_repository.dart';
-import 'package:umimamoru_flutter/infrastructure/server/cone_state_task.dart';
+import 'package:umimamoru_flutter/infrastructure/server/cone_state_data.dart';
 import 'package:umimamoru_flutter/presentation/info/cone_state_view_list.dart';
 import 'package:umimamoru_flutter/domain/entity.dart';
 import 'package:umimamoru_flutter/domain/cone_state.dart';
@@ -43,8 +44,6 @@ class _InfoDisplay extends State<InfoDisplay> {
   }
 
   init() {
-    //this._coneStateRepository = ConeStateRepository(id: widget.beach);
-    //ConeStateTask(id: widget.beach, repository: this._coneStateRepository).createEntity();
     this.entities = {};
     this.cone = [
       "4番コーン",
@@ -100,8 +99,10 @@ class _InfoDisplay extends State<InfoDisplay> {
 
   updateEntities() {
     Map<String, Entity> updatedEntities = {};
-    var stream = new Stream.periodic(const Duration(seconds: 5), (count) {
-      this.data.forEach((cone, data) =>
+
+    var stream = new Stream.periodic(const Duration(seconds: 5), (count) async{
+      var data = await this.data; // Store
+      data.forEach((cone, data) =>
       updatedEntities[cone] = ConeState(widget.beach, cone, data["level"], data["wave.speed"], data["count.occur"])
       );
     });

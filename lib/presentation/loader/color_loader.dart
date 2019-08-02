@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class Loader extends StatefulWidget {
+class ColorLoader extends StatefulWidget {
 
   final List<Color> colors;
   final Duration duration;
 
-  Loader({this.colors, this.duration});
+  ColorLoader({this.colors, this.duration});
 
   @override
-  _LoaderState createState() => _LoaderState(this.colors, this.duration);
+  _ColorLoaderState createState() => _ColorLoaderState(this.colors, this.duration);
 }
 
-class _LoaderState extends State<Loader>
+class _ColorLoaderState extends State<ColorLoader>
     with SingleTickerProviderStateMixin {
   final List<Color> colors;
   final Duration duration;
   Timer timer;
 
-  _LoaderState(this.colors, this.duration);
+  _ColorLoaderState(this.colors, this.duration);
 
   //noSuchMethod(Invocation i) => super.noSuchMethod(i);
 
