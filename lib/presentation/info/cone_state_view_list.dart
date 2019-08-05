@@ -41,7 +41,7 @@ class ConeStateViewList extends StatelessWidget {
             StateColor(waveLevel: "null", width: 30.0, height: 30.0),
             Center(
               child: Padding(
-                padding: EdgeInsets.only(top: 57.0, bottom: 56.0, left: 130.0),
+                padding: EdgeInsets.only(top: 57.0, bottom: 56.0, left: 120.0),
                 child: ColorLoader4(
                   dotOneColor: Colors.pink,
                   dotTwoColor: Colors.teal,
