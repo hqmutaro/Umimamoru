@@ -24,8 +24,8 @@ class ColorLoader4 extends StatefulWidget {
   _ColorLoader4State createState() => _ColorLoader4State();
 }
 
-class _ColorLoader4State extends State<ColorLoader4>
-    with SingleTickerProviderStateMixin {
+class _ColorLoader4State extends State<ColorLoader4> with SingleTickerProviderStateMixin {
+
   Animation<double> animation_1;
   Animation<double> animation_2;
   Animation<double> animation_3;
@@ -142,6 +142,7 @@ class _ColorLoader4State extends State<ColorLoader4>
 }
 
 class Dot extends StatelessWidget {
+
   final double radius;
   final Color color;
   final DotType type;

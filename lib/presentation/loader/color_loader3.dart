@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'dart:math';
 
 class ColorLoader3 extends StatefulWidget {
+
   final double radius;
   final double dotRadius;
 
@@ -11,8 +12,8 @@ class ColorLoader3 extends StatefulWidget {
   _ColorLoader3State createState() => _ColorLoader3State();
 }
 
-class _ColorLoader3State extends State<ColorLoader3>
-    with SingleTickerProviderStateMixin {
+class _ColorLoader3State extends State<ColorLoader3> with SingleTickerProviderStateMixin {
+
   Animation<double> animation_rotation;
   Animation<double> animation_radius_in;
   Animation<double> animation_radius_out;

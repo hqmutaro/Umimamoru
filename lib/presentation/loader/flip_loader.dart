@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class FlipLoader extends StatefulWidget {
+
   final Color loaderBackground;
   final Color iconColor;
   final IconData icon;
@@ -16,8 +17,7 @@ class FlipLoader extends StatefulWidget {
   _FlipLoaderState createState() => _FlipLoaderState(this.loaderBackground, this.iconColor, this.icon, this.animationType, this.shape, this.rotateIcon);
 }
 
-class _FlipLoaderState extends State<FlipLoader>
-    with SingleTickerProviderStateMixin {
+class _FlipLoaderState extends State<FlipLoader> with SingleTickerProviderStateMixin {
 
   AnimationController controller;
   Animation<double> rotationHorizontal;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:umimamoru_flutter/presentation/info/state/state_color.dart';
 import 'package:umimamoru_flutter/application/repository/cone_state_repository.dart';
 import 'package:umimamoru_flutter/domain/cone_state.dart';
-import 'package:umimamoru_flutter/domain/cone_state.dart';
 
 @immutable
 class ConeStateView extends StatelessWidget {
