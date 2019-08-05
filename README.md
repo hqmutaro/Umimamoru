@@ -1,16 +1,6 @@
-# umimamoru_flutter
+# About This Project
+第30回高専プログラミングコンテスト 課題部門
+沖縄工業高等専門学校 チームさやえんどうの作品、離岸流通知アプリのソースコードです。
 
-Umimamoru App
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## More
+このプロジェクトはFlutterを用いて作成しています。DDDを学習しながらコーディングしていますが、技術不足でオレオレアーキテクチャと化しているので、至らぬ点があればPR受け付けているのでどんどん投げてください！（privateやが)
