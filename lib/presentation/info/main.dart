@@ -97,7 +97,7 @@ class _InfoDisplay extends State<InfoDisplay> {
     });
   }
 
-  updateEntities() {
+  Future<void> updateEntities() async{
     Map<String, Entity> updatedEntities = {};
 
     var stream = new Stream.periodic(const Duration(seconds: 5), (count) async{
