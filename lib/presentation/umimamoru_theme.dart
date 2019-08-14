@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
-class UmimamoruTheme extends StatelessWidget implements PreferredSizeWidget {
+class UmimamoruTheme extends StatelessWidget {
 
-  final Widget title;
-  final List<Widget> widget;
+  final String title;
+  final Widget home;
 
   const UmimamoruTheme({
+    Key key,
     @required this.title,
-    this.widget,
-    Key key
-  }) : assert(title != null), super(key: key);
+    @required this.home,
+  }) :
+        assert(title != null),
+        assert(home != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Color(0xFF4CBBB4),
-      actions: this.widget,
-      title: this.title,
+    return MaterialApp(
+        title: this.title,
+        theme: ThemeData(primaryColor: colorTheme),
+        home: this.home
     );
   }
 
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
-
+  static Color get colorTheme => Color(0xFF4CBBB4);
 }

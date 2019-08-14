@@ -1,3 +1,3 @@
-class Entity{
+abstract class Entity{
   // Entity has this.
 }

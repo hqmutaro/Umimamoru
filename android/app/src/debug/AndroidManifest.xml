@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="umimamoruflutter.nitf.github.com.umimamoru_flutter">
+    package="com.github.umimamoru.umimamoru">
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru_flutter/presentation/app.dart';
+import 'package:umimamoru/presentation/app.dart';
 
-void main() {
-  runApp(App());
-}
+void main() => runApp(App());

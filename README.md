@@ -1,6 +1,6 @@
-# umimamoru_flutter
+# umimamoru
 
-Umimamoru App
+第30回全国高専プロコン 沖縄高専 さやえんどうのモバイルアプリ
 
 ## Getting Started
 

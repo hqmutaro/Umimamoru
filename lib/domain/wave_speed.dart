@@ -1,20 +1,23 @@
 enum Level {
   Calm,
   Ordinarily,
-  Fast
+  Fast,
+  None
 }
 
-// 非同期処理で毎回データをとって、波の速さをここにぶちこんで
-// それに応じて処理する]
-// ignore: missing_return
-Level getLevel(double waveSpeed) {
-  if (waveSpeed <= 0.5) {
+Level getLevel(double speed) {
+  if (speed <= 0.3) {
     return Level.Calm;
   }
-  if (waveSpeed <= 1.5) {
+  if (speed <= 1.5) {
     return Level.Ordinarily;
   }
-  if (waveSpeed >= 1.6) {
+  if (speed >= 1.6) {
     return Level.Fast;
   }
+  return Level.None;
+}
+
+String getLevelToString(Level level) {
+  return level.toString().replaceFirst(level.toString().split('.')[0] + "." , "" );
 }

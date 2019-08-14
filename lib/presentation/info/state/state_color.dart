@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class StateColor extends StatelessWidget {
 
   static const Map<String, Color> _colors = {
-    "calm" : Colors.blue,
-    "ordinarily" : Color(0xFF92D050),
-    "fast" : Color(0xFFEF8468),
-    "null" : Colors.deepPurpleAccent
+    "Calm" : Colors.blue,
+    "Ordinarily" : Color(0xFF92D050),
+    "Fast" : Color(0xFFEF8468),
+    "None" : Colors.deepPurpleAccent
   };
 
   final String waveLevel;
@@ -25,14 +25,19 @@ class StateColor extends StatelessWidget {
       onPressed: null,
       constraints: BoxConstraints(minWidth: 0.0, minHeight: 0.0),
       child: Container(
-        margin: EdgeInsets.only(top: 3.0, bottom: 3.0, left: 1.0, right: 1.0),
+        margin: const EdgeInsets.only(
+            top: 3.0,
+            bottom: 3.0,
+            left: 1.0,
+            right: 1.0
+        ),
         width: this.width,
         height: this.height,
         decoration: BoxDecoration(
             color: _colors[this.waveLevel],
             borderRadius: BorderRadius.all(Radius.circular(25.0))
-        ),
-      ),
+        )
+      )
     );
   }
 }
