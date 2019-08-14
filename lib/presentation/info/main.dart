@@ -1,141 +1,76 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:umimamoru_flutter/presentation/umimamoru_theme.dart';
-import 'package:umimamoru_flutter/presentation/back_bar.dart';
-import 'package:umimamoru_flutter/presentation/info/beach_name.dart';
-import 'package:umimamoru_flutter/presentation/info/state_image_bar.dart';
-import 'package:umimamoru_flutter/presentation/info/header.dart';
-import 'package:umimamoru_flutter/presentation/info/wave_level.dart';
-import 'package:umimamoru_flutter/presentation/info/occur_cone.dart';
-import 'package:umimamoru_flutter/presentation/info/cone_state_view.dart';
-import 'package:umimamoru_flutter/application/repository/cone_state_repository.dart';
-import 'package:umimamoru_flutter/infrastructure/server/cone_state_data.dart';
-import 'package:umimamoru_flutter/presentation/info/cone_state_view_list.dart';
-import 'package:umimamoru_flutter/domain/entity.dart';
-import 'package:umimamoru_flutter/domain/cone_state.dart';
+import 'package:umimamoru/presentation/umimamoru_theme.dart';
+import 'package:umimamoru/presentation/ui/button/previous_button.dart';
+import 'package:umimamoru/application/bloc/bloc_provider.dart';
+import 'package:umimamoru/application/bloc/occur_cone_bloc.dart';
+import 'package:umimamoru/presentation/info/occur_cone_view.dart';
+import 'package:umimamoru/presentation/info/header.dart';
+import 'package:umimamoru/presentation/info/wave_level_bar.dart';
+import 'package:umimamoru/presentation/info/cone_state_view_list.dart';
+import 'package:umimamoru/application/bloc/cone_state_bloc.dart';
+import 'package:umimamoru/presentation/info/image_action_view.dart';
 
-@immutable
-class InfoDisplay extends StatefulWidget {
+class Info extends StatefulWidget {
 
   final String beach;
   final String region;
 
-  const InfoDisplay({
+  const Info({
+    Key key,
     @required this.beach,
     @required this.region
-  }) : assert(beach != null), assert(region != null);
+  }) :
+      assert(beach != null),
+      assert(region != null),
+      super(key: key);
 
   @override
-  _InfoDisplay createState() => _InfoDisplay();
+  _Info createState() => _Info();
 }
 
-class _InfoDisplay extends State<InfoDisplay> {
-
-  List<String> cone;
-  Map<String, Map<String, dynamic>> data;
-  String image;
-  Map<String, Entity> entities;
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-    updateEntities();
-  }
-
-  init() {
-    this.entities = {};
-    this.cone = [
-      "4番コーン",
-      "5番コーン"
-    ];
-    this.data = {
-      "1番コーン" : {
-    "level" : "calm",
-    "wave.speed" : 3.0,
-    "count.occur" : 2
-    },
-    "2番コーン" : {
-    "level" : "ordinarily",
-    "wave.speed" : 4.0,
-    "count.occur" : 3
-    },
-    "3番コーン" : {
-    "level" : "ordinarily",
-    "wave.speed" : 5.0,
-    "count.occur" : 4
-    },
-    "4番コーン" : {
-    "level" : "fast",
-    "wave.speed" : 6.0,
-    "count.occur" : 5
-    },
-    "5番コーン" : {
-    "level" : "fast",
-    "wave.speed" : 7.0,
-    "count.occur" : 5
-    },
-    };
-    this.image = "rigan_bar";
-  }
-
-  updateState(Map updatedState) {
-    setState(() {
-      this.data = updatedState;
-    });
-  }
-
-  updateCone(List<String> updatedCone) {
-    setState(() {
-      this.cone = updatedCone;
-    });
-  }
-
-  updateImage(String updatedImage) {
-    setState(() {
-      this.image = updatedImage;
-    });
-  }
-
-  Future<void> updateEntities() async{
-    Map<String, Entity> updatedEntities = {};
-
-    var stream = new Stream.periodic(const Duration(seconds: 5), (count) async{
-      var data = await this.data; // Store
-      data.forEach((cone, data) =>
-      updatedEntities[cone] = ConeState(widget.beach, cone, data["level"], data["wave.speed"], data["count.occur"])
-      );
-    });
-    stream.listen((result) {
-      if (this.mounted) {
-        setState(() {
-          this.entities = updatedEntities;
-        });
-      }
-    });
-  }
+class _Info extends State<Info> {
 
   @override
   Widget build(BuildContext context) {
+    final OccurConeBloc bloc = BlocProvider.of<OccurConeBloc>(context);
+    bloc.start.add(null);
+
     return Scaffold(
-      appBar: UmimamoruTheme(title: Text(widget.beach, style: TextStyle(color: Colors.white),)),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: UmimamoruTheme.colorTheme,
+        title: Text(widget.beach, style: TextStyle(color: Colors.white)),
+      ),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                BackBar(message: "別のビーチに変更する"),
-                BeachName(region: widget.region, beach: widget.beach),
-                StateImageBar(image: this.image),
-                Header(title: "離岸流が発生している場所"),
-                OccurCone(cone: this.cone),
-                Header(title: "波のようす"),
-                WaveLevel(),
-                ConeStateViewList(entities: this.entities)
-              ]
-          ),
-        ),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              PreviousButton(message: "別のビーチに変更する"),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  widget.region + "\n" +
+                  widget.beach + "の波のようす",
+                  style: TextStyle(
+                    fontSize: 23.0,
+                    fontWeight: FontWeight.bold
+                  )
+                )
+              ),
+              ImageActionView(),
+              Header(title: "離岸流が発生している場所"),
+              OccurConeView(bloc: bloc),
+              Header(title: "波のようす"),
+              WaveLevelBar(),
+              BlocProvider<ConeStateBloc>(
+                  bloc: ConeStateBloc(widget.beach),
+                  child: ConeStateViewList(beach: widget.beach)
+              )
+            ]
+          )
+        )
       )
     );
   }
