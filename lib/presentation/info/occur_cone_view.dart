@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:umimamoru/application/bloc/bloc_provider.dart';
+import 'package:umimamoru/application/bloc/occur_cone_bloc.dart';
 
 @immutable
 class OccurConeView extends StatelessWidget {
 
-  final bloc;
+  final String beach;
 
-  const OccurConeView({@required this.bloc}) : assert(bloc != null);
+  const OccurConeView({@required this.beach}) : assert(beach != null);
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<OccurConeBloc>(context);
+    bloc.start.add(null);
+
     return StreamBuilder<List<String>>(
       stream: bloc.output,
       builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
