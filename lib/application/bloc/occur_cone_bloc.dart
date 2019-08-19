@@ -13,9 +13,7 @@ class OccurConeBloc extends BlocBase {
 
   OccurConeBloc(String beach) {
     this.beach = beach;
-    _startController.stream.listen((_) {
-      _start();
-    });
+    _startController.stream.listen((_) => _start());
   }
 
   void _start() {
@@ -35,5 +33,4 @@ class OccurConeBloc extends BlocBase {
     await _startController.close();
     await _outputController.close();
   }
-
 }
