@@ -32,9 +32,6 @@ class _Info extends State<Info> {
 
   @override
   Widget build(BuildContext context) {
-    final OccurConeBloc bloc = BlocProvider.of<OccurConeBloc>(context);
-    bloc.start.add(null);
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -61,7 +58,10 @@ class _Info extends State<Info> {
               ),
               ImageActionView(),
               Header(title: "離岸流が発生している場所"),
-              OccurConeView(bloc: bloc),
+              BlocProvider<OccurConeBloc>(
+                  bloc: OccurConeBloc(widget.beach),
+                  child: OccurConeView(beach: widget.beach)
+              ),
               Header(title: "波のようす"),
               WaveLevelBar(),
               BlocProvider<ConeStateBloc>(

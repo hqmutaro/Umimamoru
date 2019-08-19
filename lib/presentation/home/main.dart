@@ -42,7 +42,7 @@ class _Home extends State<Home> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 30),
               child: SimpleRoundIconButton(
                 backgroundColor: Colors.lightBlue,
                 buttonText: "地域を選択する",
@@ -55,7 +55,7 @@ class _Home extends State<Home> {
               )
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               child: SimpleRoundIconButton(
                 backgroundColor: Colors.deepPurple,
                 buttonText: "設定",

@@ -11,13 +11,11 @@ class ConeStateViewList extends StatelessWidget {
 
   final String beach;
 
-  const ConeStateViewList({
-    @required this.beach
-  }) : assert(beach != null);
+  const ConeStateViewList({@required this.beach}) : assert(beach != null);
 
   @override
   Widget build(BuildContext context) {
-    final ConeStateBloc bloc = BlocProvider.of<ConeStateBloc>(context);
+    final bloc = BlocProvider.of<ConeStateBloc>(context);
     bloc.start.add(null);
 
      return StreamBuilder<List<ConeState>>(

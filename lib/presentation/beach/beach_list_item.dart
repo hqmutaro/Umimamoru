@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru/presentation/beach/main.dart';
 import 'package:umimamoru/presentation/info/main.dart';
-import 'package:umimamoru/application/bloc/bloc_provider.dart';
-import 'package:umimamoru/application/bloc/occur_cone_bloc.dart';
 
 @immutable
 class BeachListItem extends StatelessWidget {
@@ -34,10 +32,8 @@ class BeachListItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BlocProvider<OccurConeBloc>(
-                bloc: OccurConeBloc(this.beach),
-                child: Info(beach: this.beach, region: this.region)
-              ))
+              MaterialPageRoute(builder: (context) => Info(beach: this.beach, region: this.region)
+              )
           );
           this.beachState.handleSearchFinish();
         }
