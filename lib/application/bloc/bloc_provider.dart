@@ -36,10 +36,7 @@ class _BlocProviderState<T> extends State<BlocProvider<BlocBase>> {
 
   @override
   void dispose() {
-    // widget.bloc.dispose();
-    // TODO: ビーチ変更毎にcloseさせなければならない
-    // disposeしないままでいいか...？
-    // 動いてて草
+    // widget.bloc.dispose(); 使わん
     super.dispose();
   }
 }

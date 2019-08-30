@@ -1,4 +1,4 @@
-package com.github.umimamoru.umimamoru
+package com.github.nitf.umimamoru
 
 import android.os.Bundle
 

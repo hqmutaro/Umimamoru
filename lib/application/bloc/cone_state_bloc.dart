@@ -21,52 +21,28 @@ class ConeStateBloc extends BlocBase {
   void _start() {
     var stream = Stream.periodic(const Duration(seconds: 5), (count) {
       var result = {
-        "アイウエオビーチ" : {
-          "1番コーン": {
-            "wave.speed": 0.3,
-            "count.occur": 3
-          },
-          "2番コーン": {
-            "wave.speed": 0.5,
-            "count.occur": 1
-          },
-          "3番コーン": {
-            "wave.speed": 0.8,
-            "count.occur": 4
-          },
-          "4番コーン": {
-            "wave.speed": 1.4,
-            "count.occur": 3
-          },
-          "5番コーン": {
-            "wave.speed": 1.8,
-            "count.occur": 2
-          }
+        "1番コーン": {
+          "wave.speed": 0.3,
+          "count.occur": 3
         },
-        "カキクケコビーチ" : {
-          "1番コーン": {
-            "wave.speed": 0.2,
-            "count.occur": 2
-          },
-          "2番コーン": {
-            "wave.speed": 1.2,
-            "count.occur": 2
-          },
-          "3番コーン": {
-            "wave.speed": 1.6,
-            "count.occur": 6
-          },
-          "4番コーン": {
-            "wave.speed": 1.3,
-            "count.occur": 2
-          },
-          "5番コーン": {
-            "wave.speed": 0.3,
-            "count.occur": 2
-          }
+        "2番コーン": {
+          "wave.speed": 0.5,
+          "count.occur": 1
+        },
+        "3番コーン": {
+          "wave.speed": 0.8,
+          "count.occur": 4
+        },
+        "4番コーン": {
+          "wave.speed": 1.4,
+          "count.occur": 3
+        },
+        "5番コーン": {
+          "wave.speed": 1.8,
+          "count.occur": 2
         }
       };
-      return result[this.beach];
+      return result;
     });
     stream.listen((result) {
       List<ConeState> entities = [];
