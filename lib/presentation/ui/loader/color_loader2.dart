@@ -61,7 +61,6 @@ class _ColorLoader2State extends State<ColorLoader2> with TickerProviderStateMix
     controller3.repeat();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -107,7 +106,6 @@ class _ColorLoader2State extends State<ColorLoader2> with TickerProviderStateMix
     controller3.dispose();
     super.dispose();
   }
-
 }
 
 class Arc1Painter extends CustomPainter {
