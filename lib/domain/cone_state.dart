@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:umimamoru/domain/entity.dart';
 
 class ConeState implements Entity {
 
-  String _beach;
-  String _cone;
-  String _waveLevel;
-  double _waveSpeed;
-  int _countOccur;
+  final String _beach;
+  final String _cone;
+  final String _waveLevel;
+  final double _waveSpeed;
+  final int _countOccur;
 
   ConeState(
       this._beach,

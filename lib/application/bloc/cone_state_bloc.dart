@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
 import 'package:umimamoru/domain/cone_state.dart';
-import 'package:umimamoru/domain/wave_speed.dart';
+import 'package:umimamoru/infrastructure/repository/cone_state_repository.dart';
 
 class ConeStateBloc extends BlocBase {
 
@@ -19,46 +19,14 @@ class ConeStateBloc extends BlocBase {
   }
 
   void _start() {
-    var stream = Stream.periodic(const Duration(seconds: 5), (count) {
-      var result = {
-        "1番コーン": {
-          "wave.speed": 0.3,
-          "count.occur": 3
-        },
-        "2番コーン": {
-          "wave.speed": 0.5,
-          "count.occur": 1
-        },
-        "3番コーン": {
-          "wave.speed": 0.8,
-          "count.occur": 4
-        },
-        "4番コーン": {
-          "wave.speed": 1.4,
-          "count.occur": 3
-        },
-        "5番コーン": {
-          "wave.speed": 1.8,
-          "count.occur": 2
-        }
-      };
-      return result;
+    ConeStateRepository repository = ConeStateRepository();
+    var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
+      List<ConeState> coneState = await repository.coneState(this.beach);
+      return coneState;
     });
-    stream.listen((result) {
-      List<ConeState> entities = [];
-      result.forEach((cone, data) {
-        entities.add(
-            ConeState(
-                this.beach,
-                cone,
-                getLevelToString(getLevel(data["wave.speed"])),
-                data["wave.speed"],
-                data["count.occur"]
-            )
-        );
-      });
-      _outputController.sink.add(entities);
-    });
+    stream.listen((result) => result.then((coneState) {
+      _outputController.sink.add(coneState);
+    }));
   }
 
   @override
