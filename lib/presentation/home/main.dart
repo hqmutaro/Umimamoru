@@ -73,15 +73,15 @@ class _Home extends State<Home> {
     );
   }
 
-  Function onConfigButton() {
+  Function onBeachButton() {
     return () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Config()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Beach()));
     };
   }
 
-  Function onBeachButton(){
+  Function onConfigButton() {
     return () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Beach()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Config()));
     };
   }
 }
