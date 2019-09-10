@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "91268380431",
+    "firebase_url": "https://umimamoru-18d48.firebaseio.com",
+    "project_id": "umimamoru-18d48",
+    "storage_bucket": "umimamoru-18d48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91268380431:android:e85f5206b9afbdc6",
+        "android_client_info": {
+          "package_name": "com.github.nitf.umimamoru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91268380431-3t0giggga93b9rgo20s390iabcn80af9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUYJGedTNjXqVvgin0brB6wHW1GEWhPfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91268380431-3t0giggga93b9rgo20s390iabcn80af9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
