@@ -31,12 +31,10 @@ class _ColorLoaderState extends State<ColorLoader>
   @override
   void initState() {
     super.initState();
-
     controller = AnimationController(
       vsync: this,
       duration: duration,
     );
-
     for (int i = 0; i < colors.length - 1; i++) {
       tweenAnimations.add(ColorTween(begin: colors[i], end: colors[i + 1]));
     }
