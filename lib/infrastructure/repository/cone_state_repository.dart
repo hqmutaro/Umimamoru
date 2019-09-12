@@ -6,6 +6,7 @@ import 'cone_state_dto.dart';
 
 class ConeStateRepository implements StateRepository{
 
+  @override
   Future<List<ConeState>> coneState(String beach) async{
     final List<ConeState> coneStateList = [];
     // Serverからデータを取る

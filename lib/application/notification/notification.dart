@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+enum _DialogActionType {
+  Cancel,
+  OK,
+}
 
 class Notification {
 
@@ -37,8 +43,31 @@ class Notification {
       builder: (_) => AlertDialog(
         title: Text(this.dialogTitle),
         content: Text(payload),
+        actions: <Widget>[
+          FlatButton(
+              child: const Text('キャンセル'),
+              onPressed: () {
+                Navigator.pop(context, _DialogActionType.Cancel);
+              }),
+          FlatButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.pop(context, _DialogActionType.OK);
+              })
+        ],
       ),
-    );
+    ).then((value) {
+      switch (value) {
+        case _DialogActionType.Cancel:
+          print("cancel...");
+          break;
+        case _DialogActionType.OK:
+          print("OK!!");
+          break;
+        default:
+          print("default");
+      }
+    });
   }
 
   Future<void> showNotification() async{
