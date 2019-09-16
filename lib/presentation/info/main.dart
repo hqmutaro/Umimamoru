@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:umimamoru/application/bloc/image_action_bloc.dart';
+import 'package:umimamoru/domain/cone_state.dart';
+import 'package:umimamoru/domain/wave_speed.dart';
+import 'package:umimamoru/infrastructure/repository/cone_state_repository.dart';
 import 'package:umimamoru/presentation/umimamoru_theme.dart';
 import 'package:umimamoru/presentation/ui/button/previous_button.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
@@ -56,7 +60,10 @@ class _Info extends State<Info> {
                   )
                 )
               ),
-              ImageActionView(),
+              BlocProvider<ImageActionBloc>(
+                  bloc: ImageActionBloc(widget.beach),
+                  child: ImageActionView(beach: widget.beach)
+              ),
               Header(title: "離岸流が発生している場所"),
               BlocProvider<OccurConeBloc>(
                   bloc: OccurConeBloc(widget.beach),
