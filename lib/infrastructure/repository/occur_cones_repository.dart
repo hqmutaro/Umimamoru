@@ -2,6 +2,7 @@ import 'package:umimamoru/domain/cone_state.dart';
 import 'package:umimamoru/domain/occur_cones.dart';
 import 'package:umimamoru/domain/repository/occur_state_repository.dart';
 import 'package:umimamoru/infrastructure/repository/cone_state_repository.dart';
+import 'package:umimamoru/domain/wave_speed.dart';
 
 class OccurConesRepository implements OccurStateRepository {
 
@@ -11,7 +12,7 @@ class OccurConesRepository implements OccurStateRepository {
     ConeStateRepository repository = ConeStateRepository();
     List<ConeState> coneState = await repository.coneState(beach);
     coneState.forEach((entity) {
-      if (entity.level == "Fast") occurCone.add(entity.cone);
+      if (entity.level == getLevelToString(Level.Fast)) occurCone.add(entity.cone);
     });
     return OccurCones(occurCone);
   }
