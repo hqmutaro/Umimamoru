@@ -27,6 +27,7 @@ class _Config extends State<Config> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               PreviousButton(message: "ホームに戻る")
+              // TODO: スワイプでWatchりすとのあいてむそうさできるようにして
             ]
           )
         )

@@ -32,8 +32,7 @@ class BeachListItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Info(beach: this.beach, region: this.region)
-              )
+              MaterialPageRoute(builder: (context) => Info(beach: this.beach, region: this.region))
           );
           this.beachState.handleSearchFinish();
         }

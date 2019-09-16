@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:umimamoru/application/notification/notification.dart' as prefix0;
 import 'package:umimamoru/presentation/umimamoru_theme.dart';
 import 'package:umimamoru/presentation/ui/button/simple_round_icon_button.dart';
 import 'package:umimamoru/presentation/beach/main.dart';
