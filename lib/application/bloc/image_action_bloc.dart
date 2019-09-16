@@ -25,9 +25,8 @@ class ImageActionBloc extends BlocBase {
       repository.forEach((coneState) {
         if (coneState.level == getLevelToString(Level.Fast)) {
           isOccurring = true;
-        }
-        else {
-          isOccurring = false;
+          _outputController.sink.add(isOccurring);
+          return;
         }
       });
       _outputController.sink.add(isOccurring);
