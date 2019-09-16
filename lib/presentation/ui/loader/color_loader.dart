@@ -20,7 +20,7 @@ class _ColorLoaderState extends State<ColorLoader>
 
   _ColorLoaderState(this.colors, this.duration);
 
-  //noSuchMethod(Invocation i) => super.noSuchMethod(i);
+  // noSuchMethod(Invocation i) => super.noSuchMethod(i);
 
   List<ColorTween> tweenAnimations = [];
   int tweenIndex = 0;
@@ -44,23 +44,17 @@ class _ColorLoaderState extends State<ColorLoader>
     for (int i = 0; i < colors.length; i++) {
       Animation<Color> animation = tweenAnimations[i].animate(CurvedAnimation(
           parent: controller,
-          curve: Interval((1 / colors.length) * (i + 1) - 0.05,
-              (1 / colors.length) * (i + 1),
-              curve: Curves.linear)));
-
+          curve: Interval((1 / colors.length) * (i + 1) - 0.05, (1 / colors.length) * (i + 1), curve: Curves.linear)));
       colorAnimations.add(animation);
     }
-
     print(colorAnimations.length);
 
     tweenIndex = 0;
-
     timer = Timer.periodic(duration, (Timer t) {
       setState(() {
         tweenIndex = (tweenIndex + 1) % colors.length;
       });
     });
-
     controller.forward();
   }
 
