@@ -21,7 +21,8 @@ class ImageActionBloc extends BlocBase {
 
   void _start() {
     bool isOccurring = false;
-    ConeStateRepository().coneState(this.beach).then((repository) {
+    var repository = ConeStateRepository();
+    repository.coneState(this.beach).then((repository) {
       repository.forEach((coneState) {
         if (coneState.level == getLevelToString(Level.Fast)) {
           isOccurring = true;
