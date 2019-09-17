@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:umimamoru/infrastructure/service/check_state.dart';
 import 'package:umimamoru/infrastructure/service/occurring_manager.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
 import 'package:umimamoru/presentation/app.dart';
