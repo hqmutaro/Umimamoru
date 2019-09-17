@@ -9,8 +9,11 @@ void main() async{
   await WatchProvider().init();
   await OccurringManager().init();
   var provider = WatchProvider.getInstance();
-  //await provider.addBeach("1919");
-  var watches = await provider.getWatches();
-  watches.forEach((watch) => print(watch));
+  var manager = OccurringManager.getInstance();
+  // await provider.addBeach("");
+  // await provider.removeBeach("");
+  // await manager.deleteOccurring("");
+  var watchBeaches = await provider.getWatchBeaches();
+  watchBeaches.forEach((watch) => print(watch));
   runApp(App());
 }
