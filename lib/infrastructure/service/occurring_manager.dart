@@ -39,7 +39,7 @@ class OccurringManager {
   Future<bool> isOccurring(String beach) async{
     //var queryResult = await db.rawQuery('SELECT * FROM Occurring WHERE beach=$beach');
     var occurringList = await this.getOccurringList();
-    print(occurringList.toString());
+    print("Occurring: " + occurringList.toString());
     var result = occurringList.where((occurring) => occurring == beach);
     return result.contains(beach);
   }
