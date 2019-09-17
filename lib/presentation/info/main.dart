@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/image_action_bloc.dart';
+import 'package:umimamoru/application/bloc/watching_bloc.dart';
 import 'package:umimamoru/domain/cone_state.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
 import 'package:umimamoru/infrastructure/repository/cone_state_repository.dart';
+import 'package:umimamoru/presentation/info/watching_button.dart';
 import 'package:umimamoru/presentation/umimamoru_theme.dart';
 import 'package:umimamoru/presentation/ui/button/previous_button.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
@@ -78,6 +80,10 @@ class _Info extends State<Info> {
             ]
           )
         )
+      ),
+      floatingActionButton: BlocProvider<WatchingBloc>(
+        bloc: WatchingBloc(widget.beach),
+        child: WatchingButton(beach: widget.beach)
       )
     );
   }
