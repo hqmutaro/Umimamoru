@@ -6,7 +6,6 @@ import 'package:umimamoru/infrastructure/service/occurring_manager.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
 import 'package:umimamoru/application/notification/notification.dart' as local;
-import 'package:umimamoru/presentation/home/main.dart';
 
 class CheckState{
 
@@ -68,7 +67,6 @@ class CheckState{
           ..showNotification();
         await this._occurringManager.setOccurring(this._beach);
         this._isOccurringBeach = true;
-        return;
       }
     }
   }

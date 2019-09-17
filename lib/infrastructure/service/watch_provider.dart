@@ -3,6 +3,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'dart:io';
 
+import 'package:umimamoru/infrastructure/service/occurring_manager.dart';
+
 class WatchProvider {
 
   static WatchProvider _instance;
@@ -29,16 +31,30 @@ class WatchProvider {
   }
 
   Future<int> addBeach(String beach) async{
-    return await this.db.insert("Watch", {'beach' : beach});
+    if (!await this.existsBeach(beach)) {
+      return await this.db.insert("Watch", {'beach' : beach});
+    }
+    return 0;
   }
 
   Future<int> removeBeach(String beach) async{
-    return await this.db.delete("Watch", where: "beach = $beach");
+    var manager = OccurringManager.getInstance();
+    if (await manager.isOccurring(beach)) {
+      await manager.deleteOccurring(beach);
+    }
+    return await this.db.rawDelete('DELETE FROM Watch WHERE beach = ?', [beach]);
+  }
+
+  Future<bool> existsBeach(String beach) async{
+    var watchBeaches = await this.getWatchBeaches();
+    print("Watching: " + watchBeaches.toString());
+    var result = watchBeaches.where((watch) => watch == beach);
+    return result.contains(beach);
   }
 
   Future<List<String>> getWatchBeaches() async{
     List<String> watches = [];
-    var query = await this.db.query("Watch", where: "beach");
+    var query = await this.db.rawQuery('SELECT * FROM Watch');
     query.forEach((item) => watches.add(item["beach"]));
     return watches;
   }
