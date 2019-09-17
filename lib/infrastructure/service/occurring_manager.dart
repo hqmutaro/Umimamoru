@@ -33,12 +33,15 @@ class OccurringManager {
   }
 
   Future<int> deleteOccurring(String beach) async{
-    return await this.db.delete("Occurring", where: "beach = $beach");
+    return await this.db.rawDelete('DELETE FROM Occurring WHERE beach = ?', [beach]);
   }
 
   Future<bool> isOccurring(String beach) async{
-    var queryResult = await db.rawQuery('SELECT * FROM Occurring WHERE beach=$beach');
-    return queryResult.isNotEmpty;
+    //var queryResult = await db.rawQuery('SELECT * FROM Occurring WHERE beach=$beach');
+    var occurringList = await this.getOccurringList();
+    print(occurringList.toString());
+    var result = occurringList.where((occurring) => occurring == beach);
+    return result.contains(beach);
   }
 
   Future<List<Map>> getOccurring(String beach) async{
@@ -46,10 +49,10 @@ class OccurringManager {
   }
 
   Future<List<String>> getOccurringList() async{
-    List<String> watches = [];
-    var query = await this.db.query("Occurring", where: "beach");
-    query.forEach((item) => watches.add(item["beach"]));
-    return watches;
+    List<String> occurringList = [];
+    var query = await this.db.rawQuery('SELECT * FROM Occurring');
+    query.forEach((item) => occurringList.add(item["beach"]));
+    return occurringList;
   }
 
   // TODO: Singleton以外でアクセスする方法
