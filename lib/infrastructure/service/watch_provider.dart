@@ -13,10 +13,10 @@ class WatchProvider {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     final dbPath = join(documentDirectory.path, "Watch.db");
     this.db = await openDatabase(
-      dbPath,
-      version: 1,
-      onCreate: (Database newDb, int version) async{
-        newDb.execute("""
+        dbPath,
+        version: 1,
+        onCreate: (Database newDb, int version) async{
+          newDb.execute("""
             CREATE TABLE IF NOT EXISTS Watch
               (
                 id INTEGER PRIMARY KEY,
@@ -29,14 +29,14 @@ class WatchProvider {
   }
 
   Future<int> addBeach(String beach) async{
-    return await this.db.insert("Watch", {"beach" : beach});
+    return await this.db.insert("Watch", {'beach' : beach});
   }
 
   Future<int> removeBeach(String beach) async{
     return await this.db.delete("Watch", where: "beach = $beach");
   }
 
-  Future<List<String>> getWatches() async{
+  Future<List<String>> getWatchBeaches() async{
     List<String> watches = [];
     var query = await this.db.query("Watch", where: "beach");
     query.forEach((item) => watches.add(item["beach"]));
