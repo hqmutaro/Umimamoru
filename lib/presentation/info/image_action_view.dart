@@ -16,12 +16,17 @@ class ImageActionView extends StatelessWidget {
     return StreamBuilder<bool>(
       stream: bloc.output,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.hasData) {
+          return Container(
+              child: Image.asset(
+                  snapshot.data ? 'images/warning.png' : 'images/safe.png',
+                  fit:BoxFit.fitWidth
+              ),
+              alignment: Alignment.center
+          );
+        }
         return Container(
-            child: Image.asset(
-                snapshot.data ? 'images/warning.png' : 'images/safe.png',
-                fit:BoxFit.fitWidth
-            ),
-            alignment: Alignment.center
+          child: Image.asset('images/safe.png', fit: BoxFit.fitWidth),
         );
       }
     );
