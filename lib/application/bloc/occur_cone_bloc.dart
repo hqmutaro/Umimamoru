@@ -18,7 +18,6 @@ class OccurConeBloc extends BlocBase {
   }
 
   void _start() {
-    OccurConesRepository repository = OccurConesRepository();
     var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
       return await OccurConesRepository().occurState(this.beach);
     });

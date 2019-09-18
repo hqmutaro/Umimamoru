@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
-import 'package:umimamoru/domain/cone_state.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
 import 'package:umimamoru/infrastructure/repository/cone_state_repository.dart';
 

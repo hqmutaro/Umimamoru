@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
 
@@ -10,6 +8,7 @@ class WatchingBloc extends BlocBase {
   StreamController<bool> _outputController = StreamController<bool>();
 
   StreamSink<void> get start => _startController.sink;
+
   Stream<bool> get output => _outputController.stream;
 
   String beach;
@@ -23,8 +22,7 @@ class WatchingBloc extends BlocBase {
     var provider = WatchProvider.getInstance();
     provider.existsBeach(this.beach)
         .then((result) =>
-        _outputController.sink.add(result)
-    );
+        _outputController.sink.add(result));
   }
 
   @override

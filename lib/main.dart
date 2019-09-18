@@ -7,7 +7,7 @@ void main() async{
   await WatchProvider().init();
   await OccurringManager().init();
   var provider = WatchProvider.getInstance();
-  var manager = OccurringManager.getInstance();
+  // var manager = OccurringManager.getInstance();
   // await provider.addBeach("");
   // await provider.removeBeach("");
   // await manager.deleteOccurring("");
