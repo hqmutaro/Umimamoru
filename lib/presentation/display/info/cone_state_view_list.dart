@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/cone_state_bloc.dart';
-import 'package:umimamoru/presentation/info/state/state_color.dart';
-import 'package:umimamoru/presentation/info/cone_state_view.dart';
+import 'package:umimamoru/presentation/display/state/state_color.dart';
+import 'package:umimamoru/presentation/display/info/cone_state_view.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader4.dart';
 import 'package:umimamoru/presentation/ui/loader/dot_type.dart';
@@ -23,7 +23,7 @@ class ConeStateViewList extends StatelessWidget {
        builder: (BuildContext context, AsyncSnapshot<List<ConeState>> snapshot) {
          List<Widget> widgets = [];
          if (snapshot.hasData && snapshot.data.isNotEmpty) {
-           snapshot.data.forEach((entity) => widgets.add(ConeStateView(cone: entity.cone, entity: entity)));
+           snapshot.data.forEach((model) => widgets.add(ConeStateView(cone: model.cone, entity: model)));
            return Column(children: widgets);
          }
          int countCone = 5;

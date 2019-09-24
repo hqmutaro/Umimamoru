@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru/presentation/info/state/state_color.dart';
+import 'package:umimamoru/presentation/display/state/state_color.dart';
 import 'package:umimamoru/domain/cone_state.dart';
 
 class ConeStateView extends StatelessWidget {
