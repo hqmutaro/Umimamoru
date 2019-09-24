@@ -37,7 +37,6 @@ class Notification {
   }
 
   Future<void> onSelectNotification(String payload) async{
-    debugPrint("payload : $payload");
     showDialog(
       context: context,
       builder: (_) => AlertDialog(

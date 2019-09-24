@@ -24,6 +24,7 @@ dependencies:
   path_provider: ^1.3.0
   shared_preferences: ^0.5.3+4
   flutter_slidable: ^0.5.3
+  google_maps_flutter: ^0.5.21+3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -51,6 +52,9 @@ flutter:
   assets:
     - images/warning.png
     - images/safe.png
+    - images/fast.png
+    - images/normal.png
+    - images/slow.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

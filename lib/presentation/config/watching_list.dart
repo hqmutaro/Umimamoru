@@ -4,7 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/watching_beach_bloc.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
-import 'package:umimamoru/presentation/info/main.dart';
+import 'package:umimamoru/presentation/display/main.dart';
 
 class WatchingList extends StatefulWidget {
 
@@ -84,7 +84,7 @@ class _WatchingList extends State<WatchingList> {
     return () {
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Info(beach: beach, region: region))
+          MaterialPageRoute(builder: (context) => DisplayHome(beach: beach, region: region))
       );
     };
   }

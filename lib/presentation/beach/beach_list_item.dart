@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru/presentation/beach/main.dart';
-import 'package:umimamoru/presentation/info/main.dart';
+import 'package:umimamoru/presentation/display/display.dart';
+import 'package:umimamoru/presentation/display/main.dart';
 
 @immutable
 class BeachListItem extends StatelessWidget {
@@ -32,7 +33,7 @@ class BeachListItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Info(beach: this.beach, region: this.region))
+              MaterialPageRoute(builder: (context) => DisplayHome(beach: this.beach, region: this.region))
           );
           this.beachState.handleSearchFinish();
         }
