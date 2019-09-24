@@ -8,7 +8,9 @@ class ConeStateDTO {
       map["cone"] as String,
       map["waveLevel"] as String,
       map["waveSpeed"] as num,
-      map["countOccur"] as num
+      map["countOccur"] as num,
+      map["latitude"] as num,
+      map["longitude"] as num
     );
   }
 
@@ -18,7 +20,9 @@ class ConeStateDTO {
       "cone" : coneState.cone,
       "waveLevel" : coneState.level,
       "waveSpeed" : coneState.speed,
-      "countOccur" : coneState.countOccur
+      "countOccur" : coneState.countOccur,
+      "latitude" : coneState.latitude,
+      "longitude" : coneState.longitude
     };
   }
 }
