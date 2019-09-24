@@ -5,8 +5,8 @@ import 'package:umimamoru/infrastructure/repository/cone_state_repository.dart';
 
 class ConeStateBloc extends BlocBase {
 
-  StreamController<void> _startController = StreamController<void>();
-  StreamController<List<ConeState>> _outputController = StreamController<List<ConeState>>();
+  StreamController<void> _startController = StreamController<void>.broadcast();
+  StreamController<List<ConeState>> _outputController = StreamController<List<ConeState>>.broadcast();
 
   StreamSink<void> get start => _startController.sink;
   Stream<List<ConeState>> get output => _outputController.stream;
