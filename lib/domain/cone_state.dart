@@ -7,19 +7,25 @@ class ConeState implements Entity {
   final String _waveLevel;
   final double _waveSpeed;
   final int _countOccur;
+  final double _latitude;
+  final double _longitude;
 
   ConeState(
       this._beach,
       this._cone,
       this._waveLevel,
       this._waveSpeed,
-      this._countOccur
+      this._countOccur,
+      this._latitude,
+      this._longitude
   ) :
       assert(_beach != null),
       assert(_cone != null),
       assert(_waveLevel != null),
       assert(_waveSpeed != null),
-      assert(_countOccur != null);
+      assert(_countOccur != null),
+      assert(_latitude != null),
+      assert(_longitude != null);
 
   String get beach => _beach;
 
@@ -30,4 +36,8 @@ class ConeState implements Entity {
   double get speed => _waveSpeed;
 
   int get countOccur => _countOccur;
+
+  double get latitude => _latitude;
+
+  double get longitude => _longitude;
 }
