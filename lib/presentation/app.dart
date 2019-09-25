@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       print("checked");
     });
     return UmimamoruTheme(
-      title: "Umimamoru",
+      title: "うみまもる",
       home: Home(),
     );
   }
