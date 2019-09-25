@@ -29,7 +29,7 @@ class ConeStateView extends StatelessWidget {
             padding: EdgeInsets.all(5.0),
             child: Text(
               "${this.cone}\n" +
-              "波の速さ ${entity.speed}m/s\n" +
+              "海流の速さ ${entity.speed}m/s\n" +
               "今月の離岸流発生回数: ${entity.countOccur}回\n",
               style: TextStyle(
                   fontSize: 20.0,

@@ -48,7 +48,7 @@ class _Display extends State<Display> {
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
                   widget.region + "\n" +
-                  widget.beach + "の波のようす",
+                  widget.beach + "の海流のようす",
                   style: TextStyle(
                     fontSize: 23.0,
                     fontWeight: FontWeight.bold
@@ -64,7 +64,7 @@ class _Display extends State<Display> {
                   bloc: OccurConeBloc(widget.beach),
                   child: OccurConeView(beach: widget.beach)
               ),
-              Header(title: "波のようす"),
+              Header(title: "海流のようす"),
               WaveLevelBar(),
               BlocProvider<ConeStateBloc>(
                   bloc: ConeStateBloc(widget.beach),
