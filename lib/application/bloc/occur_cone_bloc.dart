@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
-import 'package:umimamoru/infrastructure/repository/occur_cones_repository.dart';
+import 'package:umimamoru/infrastructure/repository/occur_modules.repository.dart';
 
 class OccurConeBloc extends BlocBase {
 
@@ -19,7 +19,7 @@ class OccurConeBloc extends BlocBase {
 
   void _start() {
     var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
-      return await OccurConesRepository().occurState(this.beach);
+      return await OccurModulesRepository().occurState(this.beach);
     });
     stream.listen((result) => result.then((occurCone) {
       _outputController.sink.add(occurCone.cones);

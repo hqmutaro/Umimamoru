@@ -1,5 +1,5 @@
-import 'package:umimamoru/domain/occur_cones.dart';
+import 'package:umimamoru/domain/occur_modules.dart';
 
 abstract class OccurStateRepository {
-  Future<OccurCones> occurState(String beach);
+  Future<OccurModules> occurState(String beach);
 }
