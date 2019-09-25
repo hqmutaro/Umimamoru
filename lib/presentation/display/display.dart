@@ -43,7 +43,7 @@ class _Display extends State<Display> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              PreviousButton(message: "別のビーチに変更する"),
+              PreviousButton(message: "別の海水浴場に変更する"),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
