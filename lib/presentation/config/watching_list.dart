@@ -42,7 +42,7 @@ class _WatchingList extends State<WatchingList> {
                         color: Colors.white,
                         child: ListTile(
                           leading: CircleAvatar(
-                              backgroundColor: Colors.indigo,
+                              backgroundColor: Colors.white,
                               child: Icon(
                                   Icons.beach_access, color: Colors.pinkAccent),
                               foregroundColor: Colors.white

@@ -30,9 +30,9 @@ class _Config extends State<Config> {
                     PreviousButton(message: "ホームに戻る"),
                     Card(
                       child: ListTile(
-                          leading: Icon(Icons.beach_access, color: Colors.pinkAccent),
+                          leading: Icon(Icons.remove_red_eye, color: Colors.pinkAccent),
                           title: Text(
-                              "Watching List",
+                              "監視リスト",
                               style: TextStyle(
                                   fontSize: 25.0
                               )

@@ -24,7 +24,7 @@ class _WatchingButton extends State<WatchingButton> {
     var provider = WatchProvider.getInstance();
     provider.existsBeach(widget.beach)
         .then((result) =>
-        this._color = result ? Colors.redAccent : Colors.white
+        this._color = result ? Colors.deepOrangeAccent : Colors.white
     );
   }
 

@@ -22,7 +22,7 @@ class _WatchingView extends State<WatchingView> {
         appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: UmimamoruTheme.colorTheme,
-            title: Text("Watchingリスト", style: TextStyle(color: Colors.white))
+            title: Text("監視リスト", style: TextStyle(color: Colors.white))
         ),
         body: Column(
           children: <Widget>[
