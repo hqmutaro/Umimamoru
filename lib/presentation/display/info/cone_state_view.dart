@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru/presentation/display/state/state_color.dart';
-import 'package:umimamoru/domain/cone_state.dart';
+import 'package:umimamoru/domain/module_state.dart';
 
 class ConeStateView extends StatelessWidget {
 
   final String cone;
-  final ConeState entity;
+  final ModuleState entity;
 
   const ConeStateView({
     @required this.cone,

@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
-import 'package:umimamoru/domain/cone_state.dart';
-import 'package:umimamoru/infrastructure/repository/cone_state_repository.dart';
+import 'package:umimamoru/domain/module_state.dart';
+import 'package:umimamoru/infrastructure/repository/module_state_repository.dart';
 
 class ConeStateBloc extends BlocBase {
 
   StreamController<void> _startController = StreamController<void>.broadcast();
-  StreamController<List<ConeState>> _outputController = StreamController<List<ConeState>>.broadcast();
+  StreamController<List<ModuleState>> _outputController = StreamController<List<ModuleState>>.broadcast();
 
   StreamSink<void> get start => _startController.sink;
-  Stream<List<ConeState>> get output => _outputController.stream;
+  Stream<List<ModuleState>> get output => _outputController.stream;
 
   String beach;
 
@@ -19,9 +19,9 @@ class ConeStateBloc extends BlocBase {
   }
 
   void _start() {
-    ConeStateRepository repository = ConeStateRepository();
+    ModuleStateRepository repository = ModuleStateRepository();
     var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
-      List<ConeState> coneState = await repository.coneState(this.beach);
+      List<ModuleState> coneState = await repository.moduleState(this.beach);
       return coneState;
     });
     stream.listen((result) => result.then((coneState) {

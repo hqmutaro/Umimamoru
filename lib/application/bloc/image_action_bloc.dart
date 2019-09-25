@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
-import 'package:umimamoru/infrastructure/repository/cone_state_repository.dart';
+import 'package:umimamoru/infrastructure/repository/module_state_repository.dart';
 
 class ImageActionBloc extends BlocBase {
 
@@ -20,8 +20,8 @@ class ImageActionBloc extends BlocBase {
 
   void _start() {
     bool isOccurring = false;
-    var repository = ConeStateRepository();
-    repository.coneState(this.beach).then((repository) {
+    var repository = ModuleStateRepository();
+    repository.moduleState(this.beach).then((repository) {
       repository.forEach((coneState) {
         if (coneState.level == getLevelToString(Level.Fast)) {
           isOccurring = true;

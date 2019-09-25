@@ -5,7 +5,7 @@ import 'package:umimamoru/presentation/display/info/cone_state_view.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader4.dart';
 import 'package:umimamoru/presentation/ui/loader/dot_type.dart';
-import 'package:umimamoru/domain/cone_state.dart';
+import 'package:umimamoru/domain/module_state.dart';
 
 class ConeStateViewList extends StatelessWidget {
 
@@ -18,12 +18,12 @@ class ConeStateViewList extends StatelessWidget {
     final bloc = BlocProvider.of<ConeStateBloc>(context);
     bloc.start.add(null);
 
-     return StreamBuilder<List<ConeState>>(
+     return StreamBuilder<List<ModuleState>>(
        stream: bloc.output,
-       builder: (BuildContext context, AsyncSnapshot<List<ConeState>> snapshot) {
+       builder: (BuildContext context, AsyncSnapshot<List<ModuleState>> snapshot) {
          List<Widget> widgets = [];
          if (snapshot.hasData && snapshot.data.isNotEmpty) {
-           snapshot.data.forEach((model) => widgets.add(ConeStateView(cone: model.cone, entity: model)));
+           snapshot.data.forEach((model) => widgets.add(ConeStateView(cone: model.module, entity: model)));
            return Column(children: widgets);
          }
          int countCone = 5;

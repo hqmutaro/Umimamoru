@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/cone_state_bloc.dart';
-import 'package:umimamoru/domain/cone_state.dart';
+import 'package:umimamoru/domain/module_state.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader3.dart';
@@ -50,19 +50,19 @@ class _MapState extends  State<MapState> {
     final bloc = BlocProvider.of<ConeStateBloc>(context);
     bloc.start.add(null);
 
-    return StreamBuilder<List<ConeState>>(
+    return StreamBuilder<List<ModuleState>>(
       stream: bloc.output,
-      builder: (BuildContext context, AsyncSnapshot<List<ConeState>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<ModuleState>> snapshot) {
         if (snapshot.hasData) {
           List<Marker> allMarkers = [];
           snapshot.data.forEach((model) async {
             allMarkers.add(
                 Marker(
-                    markerId: MarkerId(model.cone),
+                    markerId: MarkerId(model.module),
                     draggable: false,
                     position: LatLng(model.latitude, model.longitude),
                     infoWindow: InfoWindow(
-                      title: model.cone,
+                      title: model.module,
                       snippet: "流速: ${model.speed}m/s 発生回数: ${model.countOccur}",
                     ),
                     /*

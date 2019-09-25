@@ -1,5 +1,5 @@
-import 'package:umimamoru/domain/cone_state.dart';
+import 'package:umimamoru/domain/module_state.dart';
 
 abstract class StateRepository {
-  Future<List<ConeState>> coneState(String beach);
+  Future<List<ModuleState>> moduleState(String beach);
 }

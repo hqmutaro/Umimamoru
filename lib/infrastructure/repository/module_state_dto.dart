@@ -1,9 +1,9 @@
-import 'package:umimamoru/domain/cone_state.dart';
+import 'package:umimamoru/domain/module_state.dart';
 
-class ConeStateDTO {
+class ModuleStateDTO {
 
-  static ConeState decode(Map<String, dynamic> map) {
-    return ConeState(
+  static ModuleState decode(Map<String, dynamic> map) {
+    return ModuleState(
       map["beach"] as String,
       map["cone"] as String,
       map["waveLevel"] as String,
@@ -14,10 +14,10 @@ class ConeStateDTO {
     );
   }
 
-  static Map<String, dynamic> encode(ConeState coneState) {
+  static Map<String, dynamic> encode(ModuleState coneState) {
     return <String, dynamic>{
       "beach" : coneState.beach,
-      "cone" : coneState.cone,
+      "cone" : coneState.module,
       "waveLevel" : coneState.level,
       "waveSpeed" : coneState.speed,
       "countOccur" : coneState.countOccur,
