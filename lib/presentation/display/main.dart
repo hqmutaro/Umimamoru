@@ -45,9 +45,11 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
     return TabBar(
       tabs: <Tab>[
         Tab(
+          child: Text("詳細", style: TextStyle(color: Colors.white)),
           icon: Icon(Icons.perm_device_information, color: Colors.white),
         ),
         Tab(
+          child: Text("地図", style: TextStyle(color: Colors.white)),
           icon: Icon(Icons.pin_drop, color: Colors.white),
         )
       ],
