@@ -1,18 +1,18 @@
 import 'package:umimamoru/domain/entity.dart';
 
-class ConeState implements Entity {
+class ModuleState implements Entity {
 
   final String _beach;
-  final String _cone;
+  final String _module;
   final String _waveLevel;
   final double _waveSpeed;
   final int _countOccur;
   final double _latitude;
   final double _longitude;
 
-  ConeState(
+  ModuleState(
       this._beach,
-      this._cone,
+      this._module,
       this._waveLevel,
       this._waveSpeed,
       this._countOccur,
@@ -20,7 +20,7 @@ class ConeState implements Entity {
       this._longitude
   ) :
       assert(_beach != null),
-      assert(_cone != null),
+      assert(_module != null),
       assert(_waveLevel != null),
       assert(_waveSpeed != null),
       assert(_countOccur != null),
@@ -29,7 +29,7 @@ class ConeState implements Entity {
 
   String get beach => _beach;
 
-  String get cone => _cone;
+  String get module => _module;
 
   String get level => _waveLevel;
 
