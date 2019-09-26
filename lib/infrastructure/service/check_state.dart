@@ -38,7 +38,7 @@ class CheckState {
     coneStateList.forEach((model) => this.checkOccurring(model)); // 離岸流の発生判定を行う
     coneStateList.forEach((model) => this.sendNotification(model)); // 条件を判定しながら通知を行う
 
-    if ((this._isOccurringBeach) && (this._isOccurring)) {
+    if ((!this._isOccurringBeach) && (this._isOccurring)) {
       await this._occurringManager.deleteOccurring(beach);
     }
   }
