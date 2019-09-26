@@ -54,6 +54,7 @@ class CheckState {
 
   Future<void> sendNotification(ModuleState model) async{
     if (this._isOccurringMap[model.module]) {
+      this._isOccurringBeach = true;
       if (!this._isOccurring) {
         local.Notification(
             flutterLocalNotificationsPlugin: FlutterLocalNotificationsPlugin(),
@@ -66,7 +67,6 @@ class CheckState {
           ..setUp()
           ..showNotification();
         await this._occurringManager.setOccurring(this._beach);
-        this._isOccurringBeach = true;
       }
     }
   }
