@@ -87,7 +87,8 @@ class _MapState extends  State<MapState> {
               scrollGesturesEnabled: false,
               rotateGesturesEnabled: false,
               zoomGesturesEnabled: false,
-              tiltGesturesEnabled: false
+              tiltGesturesEnabled: false,
+              mapType: MapType.hybrid,
           );
         }
         return Container(
