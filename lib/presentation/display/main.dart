@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
-import 'package:umimamoru/application/bloc/cone_state_bloc.dart';
+import 'package:umimamoru/application/bloc/module_state_bloc.dart';
 import 'package:umimamoru/presentation/display/display.dart';
 import 'package:umimamoru/presentation/display/state/map_state.dart';
 
@@ -77,8 +77,8 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
         ),
         body: getTabBarView(<Widget>[
           Display(beach: widget.beach, region: widget.region),
-          BlocProvider<ConeStateBloc>(
-              bloc: ConeStateBloc(widget.beach),
+          BlocProvider<ModuleStateBloc>(
+              bloc: ModuleStateBloc(widget.beach),
               child: MapState()
           )
         ]

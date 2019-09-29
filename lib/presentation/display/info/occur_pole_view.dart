@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
-import 'package:umimamoru/application/bloc/occur_cone_bloc.dart';
+import 'package:umimamoru/application/bloc/occur_module_bloc.dart';
 
 @immutable
-class OccurConeView extends StatelessWidget {
+class OccurPoleView extends StatelessWidget {
 
   final String beach;
 
-  const OccurConeView({@required this.beach}) : assert(beach != null);
+  const OccurPoleView({@required this.beach}) : assert(beach != null);
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<OccurConeBloc>(context);
+    final bloc = BlocProvider.of<OccurModuleBloc>(context);
     bloc.start.add(null);
 
     return StreamBuilder<List<String>>(

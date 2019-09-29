@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
-import 'package:umimamoru/application/bloc/cone_state_bloc.dart';
+import 'package:umimamoru/application/bloc/module_state_bloc.dart';
 import 'package:umimamoru/domain/module_state.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader.dart';
@@ -47,7 +47,7 @@ class _MapState extends  State<MapState> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<ConeStateBloc>(context);
+    final bloc = BlocProvider.of<ModuleStateBloc>(context);
     bloc.start.add(null);
 
     return StreamBuilder<List<ModuleState>>(

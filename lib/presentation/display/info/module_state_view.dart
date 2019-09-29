@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:umimamoru/presentation/display/state/state_color.dart';
 import 'package:umimamoru/domain/module_state.dart';
 
-class ConeStateView extends StatelessWidget {
+class ModuleStateView extends StatelessWidget {
 
   final String cone;
   final ModuleState entity;
 
-  const ConeStateView({
+  const ModuleStateView({
     @required this.cone,
     @required this.entity
   }) :

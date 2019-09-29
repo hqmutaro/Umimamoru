@@ -3,7 +3,7 @@ import 'package:umimamoru/application/bloc/bloc_base.dart';
 import 'package:umimamoru/domain/module_state.dart';
 import 'package:umimamoru/infrastructure/repository/module_state_repository.dart';
 
-class ConeStateBloc extends BlocBase {
+class ModuleStateBloc extends BlocBase {
 
   StreamController<void> _startController = StreamController<void>.broadcast();
   StreamController<List<ModuleState>> _outputController = StreamController<List<ModuleState>>.broadcast();
@@ -13,7 +13,7 @@ class ConeStateBloc extends BlocBase {
 
   String beach;
 
-  ConeStateBloc(String beach) {
+  ModuleStateBloc(String beach) {
     this.beach = beach;
     _startController.stream.listen((_) => _start());
   }
