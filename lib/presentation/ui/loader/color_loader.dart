@@ -12,8 +12,8 @@ class ColorLoader extends StatefulWidget {
   _ColorLoaderState createState() => _ColorLoaderState(this.colors, this.duration);
 }
 
-class _ColorLoaderState extends State<ColorLoader>
-    with SingleTickerProviderStateMixin {
+class _ColorLoaderState extends State<ColorLoader> with SingleTickerProviderStateMixin {
+
   final List<Color> colors;
   final Duration duration;
   Timer timer;
@@ -33,7 +33,7 @@ class _ColorLoaderState extends State<ColorLoader>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: duration,
+      duration: duration
     );
     for (int i = 0; i < colors.length - 1; i++) {
       tweenAnimations.add(ColorTween(begin: colors[i], end: colors[i + 1]));

@@ -187,13 +187,13 @@ class _ColorLoader3State extends State<ColorLoader3> with SingleTickerProviderSt
 
   @override
   void dispose() {
-
     controller.dispose();
     super.dispose();
   }
 }
 
 class Dot extends StatelessWidget {
+
   final double radius;
   final Color color;
 

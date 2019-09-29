@@ -74,7 +74,8 @@ class Notification {
         'umimamoru',
         'うみまもる',
         '離岸流情報アプリ',
-        priority: Priority.High,importance: Importance.Max
+        priority: Priority.High,
+        importance: Importance.Max
     );
     var iOS = IOSNotificationDetails();
     var platform = NotificationDetails(android, iOS);
