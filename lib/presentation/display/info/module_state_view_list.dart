@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru/application/bloc/cone_state_bloc.dart';
+import 'package:umimamoru/application/bloc/module_state_bloc.dart';
 import 'package:umimamoru/presentation/display/state/state_color.dart';
-import 'package:umimamoru/presentation/display/info/cone_state_view.dart';
+import 'package:umimamoru/presentation/display/info/module_state_view.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader4.dart';
 import 'package:umimamoru/presentation/ui/loader/dot_type.dart';
 import 'package:umimamoru/domain/module_state.dart';
 
-class ConeStateViewList extends StatelessWidget {
+class ModuleStateViewList extends StatelessWidget {
 
   final String beach;
 
-  const ConeStateViewList({@required this.beach}) : assert(beach != null);
+  const ModuleStateViewList({@required this.beach}) : assert(beach != null);
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<ConeStateBloc>(context);
+    final bloc = BlocProvider.of<ModuleStateBloc>(context);
     bloc.start.add(null);
 
      return StreamBuilder<List<ModuleState>>(
@@ -23,7 +23,7 @@ class ConeStateViewList extends StatelessWidget {
        builder: (BuildContext context, AsyncSnapshot<List<ModuleState>> snapshot) {
          List<Widget> widgets = [];
          if (snapshot.hasData && snapshot.data.isNotEmpty) {
-           snapshot.data.forEach((model) => widgets.add(ConeStateView(cone: model.module, entity: model)));
+           snapshot.data.forEach((model) => widgets.add(ModuleStateView(cone: model.module, entity: model)));
            return Column(children: widgets);
          }
          int countCone = 5;
