@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
 import 'package:umimamoru/infrastructure/repository/occur_modules.repository.dart';
 
-class OccurConeBloc extends BlocBase {
+class OccurModuleBloc extends BlocBase {
 
   StreamController<void> _startController = StreamController<void>();
   StreamController<List<String>> _outputController = StreamController<List<String>>();
@@ -12,7 +12,7 @@ class OccurConeBloc extends BlocBase {
 
   String beach;
 
-  OccurConeBloc(String beach) {
+  OccurModuleBloc(String beach) {
     this.beach = beach;
     _startController.stream.listen((_) => _start());
   }
