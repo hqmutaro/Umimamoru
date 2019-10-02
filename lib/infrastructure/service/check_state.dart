@@ -29,10 +29,10 @@ class CheckState {
   }
 
   Future<void> run(String beach) async{
-    this._isOccurringMap = <String, bool>{}; // initializing
-    this._isOccurringBeach = false; // initializing
-    this._isOccurring = await this._occurringManager.isOccurring(beach); // initializing
-    this._beach = beach; // initializing
+    this._isOccurringMap = <String, bool>{};
+    this._isOccurringBeach = false;
+    this._isOccurring = await this._occurringManager.isOccurring(beach);
+    this._beach = beach;
     var coneStateList = await this._coneStateRepository.moduleState(beach);
 
     coneStateList.forEach((model) => this.checkOccurring(model)); // 離岸流の発生判定を行う

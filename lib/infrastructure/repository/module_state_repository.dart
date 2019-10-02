@@ -1,16 +1,35 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
 import 'package:umimamoru/domain/module_state.dart';
 import 'package:umimamoru/domain/repository/state_repository.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
 
-import 'module_state_dto.dart';
+import 'dto/module_state_dto.dart';
 
 class ModuleStateRepository implements StateRepository{
 
   @override
   Future<List<ModuleState>> moduleState(String beach) async{
     final List<ModuleState> moduleStateList = [];
-    // Serverからデータを取る
-    Map<String, Map<String, dynamic>> data = {
+    var url = "http://35.247.121.242:8080/Umimamoru/umimamoru";
+
+    var beachData = await http.get(
+        url + "/net/beach""?net=$beach",
+        headers: {"Content-Type" : "application/json"}
+    ) as List;
+    var net = beachData.first["net"];
+
+
+    var flow = "http://35.247.121.242:8080/Umimamoru/umimamoru/net/flow"
+        "?net=0";
+    final response = await http.get(url, headers: {"Content-Type": "application/json"});
+    var list = json.decode(response.body).toList() as List<Map<String, dynamic>>;
+    var dataMap = <String, Map<String, dynamic>>{};
+
+    //list.first.forEach(());
+    Map<String, Map<String, dynamic>> datatinko = {
       "1番モジュール": {
         "wave.speed": 0.3,
         "count.occur": 3,
@@ -42,7 +61,7 @@ class ModuleStateRepository implements StateRepository{
         "longitude" : 128.026965
       }
     };
-    data.forEach((cone, data) {
+    datatinko.forEach((cone, data) {
       Map<String, dynamic> stateMap = {
         "beach" : beach,
         "cone" : cone,
