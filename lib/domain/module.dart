@@ -1,35 +1,30 @@
 import 'package:umimamoru/domain/entity.dart';
 
-class ModuleState implements Entity {
+class Module implements Entity {
 
-  final String _beach;
-  final String _module;
+  final int _id;
   final String _waveLevel;
   final double _waveSpeed;
   final int _countOccur;
   final double _latitude;
   final double _longitude;
 
-  ModuleState(
-      this._beach,
-      this._module,
+  Module(
+      this._id,
       this._waveLevel,
       this._waveSpeed,
       this._countOccur,
       this._latitude,
       this._longitude
   ) :
-      assert(_beach != null),
-      assert(_module != null),
+      assert(_id != null),
       assert(_waveLevel != null),
       assert(_waveSpeed != null),
       assert(_countOccur != null),
       assert(_latitude != null),
       assert(_longitude != null);
 
-  String get beach => _beach;
-
-  String get module => _module;
+  int get id => _id;
 
   String get level => _waveLevel;
 
