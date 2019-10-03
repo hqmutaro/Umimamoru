@@ -10,11 +10,12 @@ class ServerBeachRepository extends BeachRepository {
   Future<Beach> beachData(String beach) async{
     var url = "http://35.247.121.242:8080/Umimamoru/umimamoru";
     var beachData = await http.get(
-        url + "/net/beach""?beach=シーグラスビーチ",
+        url + "/net/beach?beach=$beach",
         headers: {"Content-Type" : "application/json"}
     );
-    final list = convert.json.decode(beachData.body);
-    Map<String, dynamic> map = list[0];
+    final List<dynamic> list = convert.json.decode(beachData.body);
+    Map<String, dynamic> map = list.first;
+
     return BeachDTO.decode(map);
   }
 }
