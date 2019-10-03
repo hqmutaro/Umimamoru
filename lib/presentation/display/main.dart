@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
-import 'package:umimamoru/application/bloc/module_state_bloc.dart';
+import 'package:umimamoru/application/bloc/module_bloc.dart';
+import 'package:umimamoru/domain/beach.dart';
 import 'package:umimamoru/presentation/display/display.dart';
 import 'package:umimamoru/presentation/display/state/map_state.dart';
 
@@ -9,16 +10,13 @@ import '../umimamoru_theme.dart';
 
 class DisplayHome extends StatefulWidget {
 
-  final String beach;
-  final String region;
+  final Beach beach;
 
   const DisplayHome({
     Key key,
-    @required this.beach,
-    @required this.region
+    @required this.beach
   }) :
         assert(beach != null),
-        assert(region != null),
         super(key: key);
 
   @override
@@ -72,13 +70,13 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
         appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: UmimamoruTheme.colorTheme,
-            title: Text(widget.beach, style: TextStyle(color: Colors.white)),
+            title: Text(widget.beach.name, style: TextStyle(color: Colors.white)),
             bottom: getTabBar()
         ),
         body: getTabBarView(<Widget>[
-          Display(beach: widget.beach, region: widget.region),
-          BlocProvider<ModuleStateBloc>(
-              bloc: ModuleStateBloc(widget.beach),
+          Display(beach: widget.beach),
+          BlocProvider<ModuleBloc>(
+              bloc: ModuleBloc(widget.beach),
               child: MapState()
           )
         ]
