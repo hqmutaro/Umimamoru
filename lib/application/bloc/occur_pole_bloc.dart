@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
-import 'package:umimamoru/infrastructure/repository/occur_modules.repository.dart';
+import 'package:umimamoru/domain/beach.dart';
+import 'package:umimamoru/infrastructure/repository/server_occur_poles_repository.dart';
 
-class OccurModuleBloc extends BlocBase {
+class OccurPoleBloc extends BlocBase {
 
   StreamController<void> _startController = StreamController<void>();
   StreamController<List<String>> _outputController = StreamController<List<String>>();
@@ -10,9 +11,9 @@ class OccurModuleBloc extends BlocBase {
   StreamSink<void> get start => _startController.sink;
   Stream<List<String>> get output => _outputController.stream;
 
-  String beach;
+  Beach beach;
 
-  OccurModuleBloc(String beach) {
+  OccurPoleBloc(Beach beach) {
     this.beach = beach;
     _startController.stream.listen((_) => _start());
   }
@@ -21,8 +22,8 @@ class OccurModuleBloc extends BlocBase {
     var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
       return await OccurModulesRepository().occurState(this.beach);
     });
-    stream.listen((result) => result.then((occurCone) {
-      _outputController.sink.add(occurCone.cones);
+    stream.listen((result) => result.then((occurPole) {
+      _outputController.sink.add(occurPole.cones);
     }));
   }
 

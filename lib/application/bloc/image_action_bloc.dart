@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
+import 'package:umimamoru/domain/beach.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
-import 'package:umimamoru/infrastructure/repository/module_state_repository.dart';
+import 'package:umimamoru/infrastructure/repository/server_module_repository.dart';
 
 class ImageActionBloc extends BlocBase {
 
@@ -11,19 +12,19 @@ class ImageActionBloc extends BlocBase {
   StreamSink<void> get start => _startController.sink;
   Stream<bool> get output => _outputController.stream;
 
-  String beach;
+  Beach beach;
 
-  ImageActionBloc(String beach) {
+  ImageActionBloc(Beach beach) {
     this.beach = beach;
     _startController.stream.listen((_) => _start());
   }
 
   void _start() {
     bool isOccurring = false;
-    var repository = ModuleStateRepository();
+    var repository = ServerModuleRepository();
     repository.moduleState(this.beach).then((repository) {
-      repository.forEach((coneState) {
-        if (coneState.level == getLevelToString(Level.Fast)) {
+      repository.forEach((module) {
+        if (module.level == getLevelToString(Level.Fast)) {
           isOccurring = true;
           _outputController.sink.add(isOccurring);
           return;
