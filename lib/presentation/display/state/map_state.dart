@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
-import 'package:umimamoru/application/bloc/module_state_bloc.dart';
-import 'package:umimamoru/domain/module_state.dart';
+import 'package:umimamoru/application/bloc/module_bloc.dart';
+import 'package:umimamoru/domain/module.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader3.dart';
@@ -47,23 +47,23 @@ class _MapState extends  State<MapState> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<ModuleStateBloc>(context);
+    final bloc = BlocProvider.of<ModuleBloc>(context);
     bloc.start.add(null);
 
-    return StreamBuilder<List<ModuleState>>(
+    return StreamBuilder<List<Module>>(
       stream: bloc.output,
-      builder: (BuildContext context, AsyncSnapshot<List<ModuleState>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<Module>> snapshot) {
         if (snapshot.hasData) {
           List<Marker> allMarkers = [];
           snapshot.data.forEach((model) async {
             allMarkers.add(
                 Marker(
-                    markerId: MarkerId(model.module),
+                    markerId: MarkerId(model.id.toString()),
                     draggable: false,
                     position: LatLng(model.latitude, model.longitude),
                     infoWindow: InfoWindow(
-                      title: model.module,
-                      snippet: "流速: ${model.speed}m/s 発生回数: ${model.countOccur}",
+                      title: model.id.toString(),
+                      snippet: "流速: ${model.speed}m/s "//発生回数: ${model.countOccur}",
                     ),
                     /*
                     icon: await BitmapDescriptor.fromAssetImage(
