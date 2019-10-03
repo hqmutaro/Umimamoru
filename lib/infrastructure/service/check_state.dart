@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:umimamoru/domain/module_state.dart';
-import 'package:umimamoru/infrastructure/repository/module_state_repository.dart';
+import 'package:umimamoru/domain/module.dart';
+import 'package:umimamoru/domain/repository/beach_repository.dart';
+import 'package:umimamoru/infrastructure/repository/server_beach_repository.dart';
+import 'package:umimamoru/infrastructure/repository/server_module_repository.dart';
 import 'package:umimamoru/infrastructure/service/occurring_manager.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
@@ -15,11 +17,11 @@ class CheckState {
   bool _isOccurring;
   String _beach;
   OccurringManager _occurringManager;
-  ModuleStateRepository _coneStateRepository;
+  ServerModuleRepository _serverModuleRepository;
 
   CheckState({this.context}) {
     this._occurringManager = OccurringManager.getInstance();
-    this._coneStateRepository = ModuleStateRepository();
+    this._serverModuleRepository = ServerModuleRepository();
   }
 
   void checkState() async{
@@ -33,27 +35,28 @@ class CheckState {
     this._isOccurringBeach = false;
     this._isOccurring = await this._occurringManager.isOccurring(beach);
     this._beach = beach;
-    var coneStateList = await this._coneStateRepository.moduleState(beach);
+    var beachData = await ServerBeachRepository().beachData(beach);
+    var moduleList = await this._serverModuleRepository.moduleState(beachData);
 
-    coneStateList.forEach((model) => this.checkOccurring(model)); // 離岸流の発生判定を行う
-    coneStateList.forEach((model) => this.sendNotification(model)); // 条件を判定しながら通知を行う
+    moduleList.forEach((model) => this.checkOccurring(model)); // 離岸流の発生判定を行う
+    moduleList.forEach((model) => this.sendNotification(model)); // 条件を判定しながら通知を行う
 
     if ((!this._isOccurringBeach) && (this._isOccurring)) {
       await this._occurringManager.deleteOccurring(beach);
     }
   }
 
-  Future<void> checkOccurring(ModuleState model) async{
+  Future<void> checkOccurring(Module model) async{
     if (model.level == getLevelToString(Level.Fast)) {
-      this._isOccurringMap[model.module] = true;
+      this._isOccurringMap[model.id.toString()] = true;
     }
     else {
-      this._isOccurringMap[model.module] = false;
+      this._isOccurringMap[model.id.toString()] = false;
     }
   }
 
-  Future<void> sendNotification(ModuleState model) async{
-    if (this._isOccurringMap[model.module]) {
+  Future<void> sendNotification(Module model) async{
+    if (this._isOccurringMap[model.id]) {
       this._isOccurringBeach = true;
       if (!this._isOccurring) {
         local.Notification(
