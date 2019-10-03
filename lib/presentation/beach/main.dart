@@ -100,12 +100,12 @@ class BeachState extends State<Beach> {
   }
 
   List<BeachListItem> buildList() {
-    return this.beachList.map((contact) => BeachListItem(beach: contact, region: this.beaches[contact], beachState: this)).toList();
+    return this.beachList.map((contact) => BeachListItem(beachName: contact, region: this.beaches[contact], beachState: this)).toList();
   }
 
   List<BeachListItem> buildSearchList() {
     if (this.searchText.isEmpty) {
-      return this.beachList.map((contact) => BeachListItem(beach: contact, region: this.beaches[contact], beachState: this)).toList();
+      return this.beachList.map((contact) => BeachListItem(beachName: contact, region: this.beaches[contact], beachState: this)).toList();
     }
     else {
       List<String> searchList = [];
@@ -114,7 +114,7 @@ class BeachState extends State<Beach> {
           searchList.add(beach);
         }
       });
-      return searchList.map((contact) => BeachListItem(beach: contact, region: this.beaches[contact], beachState: this)).toList();
+      return searchList.map((contact) => BeachListItem(beachName: contact, region: this.beaches[contact], beachState: this)).toList();
     }
   }
 

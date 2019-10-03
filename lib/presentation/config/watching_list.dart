@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/watching_beach_bloc.dart';
+import 'package:umimamoru/infrastructure/repository/server_beach_repository.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
 import 'package:umimamoru/presentation/display/main.dart';
 
@@ -49,7 +50,7 @@ class _WatchingList extends State<WatchingList> {
                           ),
                           title: Text(snapshot.data[index]),
                           subtitle: Text("沖縄県名護市辺野古"),
-                          onTap: onTap(snapshot.data[index], "沖縄県名護市辺野古"),
+                          onTap: onTap(snapshot.data[index]),
                         ),
                       ),
                       actionPane: SlidableDrawerActionPane(),
@@ -80,11 +81,12 @@ class _WatchingList extends State<WatchingList> {
     };
   }
 
-  Function onTap(String beach, String region) {
-    return () {
+  Function onTap(String beachName) {
+    return () async{
+      var beach = await ServerBeachRepository().beachData(beachName);
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DisplayHome(beach: beach, region: region))
+          MaterialPageRoute(builder: (context) => DisplayHome(beach: beach))
       );
     };
   }
