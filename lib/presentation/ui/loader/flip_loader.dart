@@ -191,7 +191,7 @@ class _FlipLoaderState extends State<FlipLoader> with SingleTickerProviderStateM
             child: Container(
               decoration: BoxDecoration(
                 shape: shape == "circle" ? BoxShape.circle : BoxShape.rectangle,
-                borderRadius: shape == "circle" ? null : new BorderRadius.all(const Radius.circular(8.0)),
+                borderRadius: shape == "circle" ? null : BorderRadius.all(const Radius.circular(8.0)),
                 color: loaderColor
               ),
               width: 40.0,

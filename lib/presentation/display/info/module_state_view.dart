@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru/presentation/info/state/state_color.dart';
-import 'package:umimamoru/domain/cone_state.dart';
+import 'package:umimamoru/presentation/display/state/state_color.dart';
+import 'package:umimamoru/domain/module.dart';
 
-class ConeStateView extends StatelessWidget {
+class ModuleStateView extends StatelessWidget {
 
-  final String cone;
-  final ConeState entity;
+  final String module;
+  final Module entity;
 
-  const ConeStateView({
-    @required this.cone,
+  const ModuleStateView({
+    @required this.module,
     @required this.entity
   }) :
-        assert(cone != null),
+        assert(module != null),
         assert(entity != null);
 
   @override
@@ -28,8 +28,8 @@ class ConeStateView extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(5.0),
             child: Text(
-              "${this.cone}\n" +
-              "波の速さ ${entity.speed}m/s\n" +
+              "${this.module}番モジュール\n" +
+              "海流の速さ ${entity.speed}m/s\n" +
               "今月の離岸流発生回数: ${entity.countOccur}回\n",
               style: TextStyle(
                   fontSize: 20.0,

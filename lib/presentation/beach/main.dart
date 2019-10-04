@@ -21,7 +21,7 @@ class BeachState extends State<Beach> {
   String searchText = "";
   bool isSearching;
 
-  Widget title = Text("ビーチリスト", style: TextStyle(color: Colors.white));
+  Widget title = Text("海水浴場一覧", style: TextStyle(color: Colors.white));
   Icon actionIcon = Icon(Icons.search, color: Colors.white);
 
   BeachState() {
@@ -46,17 +46,7 @@ class BeachState extends State<Beach> {
     super.initState();
     this.isSearching = false;
     this.beaches = {
-      "アイウエオビーチ": "沖縄県あいうえお市辺野古",
-      "カキクケコビーチ": "沖縄県かきくけこ市辺野古",
-      "サシスセソビーチ": "沖縄県さしすせそ市辺野古",
-      "タチツテトビーチ": "沖縄県たちつてと市辺野古",
-      "ナニヌネノビーチ": "沖縄県なにぬねの市辺野古",
-      "ハヒフヘホビーチ": "沖縄県はひふへほ市辺野古",
-      "マミムメモビーチ": "沖縄県まみむめも市辺野古",
-      "ワイウエヲビーチ": "沖縄県わいうえを市辺野古",
-      "ニャニャニャニャニャンビーチ": "沖縄県にゃにゃにゃにゃにゃ市辺野古",
-      "ニャーンビーチ": "沖縄県にゃーん市辺野古",
-      "ニョニョニョニョニョビーチ": "沖縄県にょにょにょにょにょ市辺野古"
+      "シーグラスビーチ": "沖縄県名護市辺野古豊原"
     };
     this.beachList = this.beaches.keys.toList();
   }
@@ -80,7 +70,7 @@ class BeachState extends State<Beach> {
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search, color: Colors.white),
-                      hintText: "ビーチを検索...",
+                      hintText: "海水浴場を検索...",
                       hintStyle: TextStyle(color: Colors.white)
                     ),
                   );
@@ -110,12 +100,12 @@ class BeachState extends State<Beach> {
   }
 
   List<BeachListItem> buildList() {
-    return this.beachList.map((contact) => BeachListItem(beach: contact, region: this.beaches[contact], beachState: this)).toList();
+    return this.beachList.map((contact) => BeachListItem(beachName: contact, region: this.beaches[contact], beachState: this)).toList();
   }
 
   List<BeachListItem> buildSearchList() {
     if (this.searchText.isEmpty) {
-      return this.beachList.map((contact) => BeachListItem(beach: contact, region: this.beaches[contact], beachState: this)).toList();
+      return this.beachList.map((contact) => BeachListItem(beachName: contact, region: this.beaches[contact], beachState: this)).toList();
     }
     else {
       List<String> searchList = [];
@@ -124,7 +114,7 @@ class BeachState extends State<Beach> {
           searchList.add(beach);
         }
       });
-      return searchList.map((contact) => BeachListItem(beach: contact, region: this.beaches[contact], beachState: this)).toList();
+      return searchList.map((contact) => BeachListItem(beachName: contact, region: this.beaches[contact], beachState: this)).toList();
     }
   }
 
@@ -139,7 +129,7 @@ class BeachState extends State<Beach> {
   void handleSearchFinish() {
     setState(() {
       this.actionIcon = Icon(Icons.search, color: Colors.white);
-      this.title = Text("ビーチ", style: TextStyle(color: Colors.white));
+      this.title = Text("海水浴場一覧", style: TextStyle(color: Colors.white));
       this.isSearching = false;
       this.searchController.clear();
     });

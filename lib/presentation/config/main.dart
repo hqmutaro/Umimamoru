@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umimamoru/presentation/config/watching_view.dart';
 import 'package:umimamoru/presentation/umimamoru_theme.dart';
 import 'package:umimamoru/presentation/ui/button/previous_button.dart';
 
@@ -21,17 +22,34 @@ class _Config extends State<Config> {
         title: Text("設定", style: TextStyle(color: Colors.white))
       ),
       body: Container(
-        color: Colors.white,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              PreviousButton(message: "ホームに戻る")
-            ]
+          color: Colors.white,
+          child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    PreviousButton(message: "ホームに戻る"),
+                    Card(
+                      child: ListTile(
+                          leading: Icon(Icons.remove_red_eye, color: Colors.pinkAccent),
+                          title: Text(
+                              "監視リスト",
+                              style: TextStyle(
+                                  fontSize: 25.0
+                              )
+                          ),
+                          onTap: onWatching()
+                      )
+                    )
+                  ]
+              )
           )
-        )
       )
     );
   }
 
+  Function onWatching() {
+    return () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => WatchingView()));
+    };
+  }
 }

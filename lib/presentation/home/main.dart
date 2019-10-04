@@ -21,7 +21,7 @@ class _Home extends State<Home> {
       appBar: AppBar(
         backgroundColor: UmimamoruTheme.colorTheme,
         title: Text(
-          "Umimamoru",
+          "うみまもる",
           style: TextStyle(color: Colors.white)
         )
       ),
@@ -45,7 +45,7 @@ class _Home extends State<Home> {
               padding: const EdgeInsets.only(top: 30),
               child: SimpleRoundIconButton(
                 backgroundColor: Colors.lightBlue,
-                buttonText: "地域を選択する",
+                buttonText: "海水浴場を選択",
                 textColor: Colors.white,
                 textSize: 20.0,
                 icon: Icon(Icons.arrow_forward),

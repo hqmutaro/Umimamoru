@@ -14,7 +14,7 @@ class WaveLevelBar extends StatelessWidget {
         children: <Widget>[
           SpaceBox.width(13),
           Text(
-              "波の速さ",
+              "海流の速さ",
               textAlign: TextAlign.left,
               style: TextStyle(
                   fontSize: 15.0

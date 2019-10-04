@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
-import 'package:umimamoru/application/bloc/occur_cone_bloc.dart';
+import 'package:umimamoru/application/bloc/occur_pole_bloc.dart';
 
 @immutable
-class OccurConeView extends StatelessWidget {
+class OccurPoleView extends StatelessWidget {
 
   final String beach;
 
-  const OccurConeView({@required this.beach}) : assert(beach != null);
+  const OccurPoleView({@required this.beach}) : assert(beach != null);
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<OccurConeBloc>(context);
+    final bloc = BlocProvider.of<OccurPoleBloc>(context);
     bloc.start.add(null);
 
     return StreamBuilder<List<String>>(
@@ -22,7 +22,7 @@ class OccurConeView extends StatelessWidget {
           snapshot.data.forEach((cone) => widgets.add(Padding(
               padding: EdgeInsets.only(left: 20.0),
               child: Text(
-                  "・$cone",
+                  "・$cone番ポール",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       fontSize: 20.0,
