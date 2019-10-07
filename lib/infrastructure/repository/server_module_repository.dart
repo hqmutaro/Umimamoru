@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:umimamoru/application/Debug.dart';
 import 'package:umimamoru/domain/beach.dart';
 
 import 'package:umimamoru/domain/module.dart';
@@ -12,7 +13,19 @@ import 'dto/module_dto.dart';
 class ServerModuleRepository implements ModuleRepository {
 
   @override
-  Future<List<Module>> moduleState(Beach beach) async {
+  Future<List<Module>> moduleState(Beach beach) async{
+    if (Debug.isDebugMode()) {
+      return <Module>[
+        ModuleDTO.decode(<String, dynamic>{
+          "loc": 1,
+          "wave.level": "Fast",
+          "wave.speed": 1.8,
+          "count.occur": 3,
+          "latitude": 22.0,
+          "longitude": 140.0
+        })
+      ];
+    }
     var url = "http://35.247.121.242:8080/Umimamoru/umimamoru";
     var net = beach.net;
     var moduleResponse = await http.get(
@@ -20,10 +33,10 @@ class ServerModuleRepository implements ModuleRepository {
         headers: {"Content-Type": "application/json"}
     );
     List moduleDataList = json.decode(moduleResponse.body);
-    print(moduleDataList.first["latitude"]);
+    //print(moduleDataList.first["latitude"]);
 
     var moduleStateList = <Module>[];
-    print("moduledata: $moduleDataList");
+    //print("moduledata: $moduleDataList");
     for (Map<String, dynamic> moduleData in moduleDataList) {
       var module = await moduleListed(net, url, moduleData);
       moduleStateList.add(module);

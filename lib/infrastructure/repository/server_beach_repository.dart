@@ -1,3 +1,4 @@
+import 'package:umimamoru/application/Debug.dart';
 import 'package:umimamoru/domain/beach.dart';
 import 'package:umimamoru/domain/repository/beach_repository.dart';
 import 'dart:convert' as convert;
@@ -8,6 +9,9 @@ class ServerBeachRepository extends BeachRepository {
   
   @override
   Future<Beach> beachData(String beach) async{
+    if (Debug.isDebugMode()) {
+      return BeachDTO.debug();
+    }
     var url = "http://35.247.121.242:8080/Umimamoru/umimamoru";
     var beachData = await http.get(
         url + "/net/beach?beach=$beach",

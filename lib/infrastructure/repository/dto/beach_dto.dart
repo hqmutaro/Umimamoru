@@ -21,4 +21,14 @@ class BeachDTO {
       "net" : beach.net,
     };
   }
+
+  static Beach debug() {
+    return Beach(
+      "シーグラスビーチ",
+      "沖縄県",
+      20,
+      140,
+      0
+    );
+  }
 }
