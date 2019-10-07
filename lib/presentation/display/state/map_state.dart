@@ -62,7 +62,7 @@ class _MapState extends  State<MapState> {
                     draggable: false,
                     position: LatLng(model.latitude, model.longitude),
                     infoWindow: InfoWindow(
-                      title: model.id.toString(),
+                      title: model.id.toString() + "モジュール",
                       snippet: "流速: ${model.speed}m/s "//発生回数: ${model.countOccur}",
                     ),
                     /*

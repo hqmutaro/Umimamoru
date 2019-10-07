@@ -37,7 +37,8 @@ class _Home extends State<Home> {
                 style: TextStyle(
                   fontSize: 60.0,
                   color: Colors.black,
-                  fontWeight: FontWeight.w100,
+                  fontFamily: "SpicaNeue",
+                  fontWeight: FontWeight.w300
                 )
               ),
             ),

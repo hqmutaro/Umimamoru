@@ -21,6 +21,7 @@ class BeachState extends State<Beach> {
   String searchText = "";
   bool isSearching;
 
+  final key = GlobalKey<ScaffoldState>();
   Widget title = Text("海水浴場一覧", style: TextStyle(color: Colors.white));
   Icon actionIcon = Icon(Icons.search, color: Colors.white);
 
@@ -54,6 +55,7 @@ class BeachState extends State<Beach> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: key,
       appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: UmimamoruTheme.colorTheme,
@@ -72,7 +74,7 @@ class BeachState extends State<Beach> {
                       prefixIcon: Icon(Icons.search, color: Colors.white),
                       hintText: "海水浴場を検索...",
                       hintStyle: TextStyle(color: Colors.white)
-                    ),
+                    )
                   );
                   handleSearchStart();
                 }
@@ -109,9 +111,10 @@ class BeachState extends State<Beach> {
     }
     else {
       List<String> searchList = [];
-      this.beachList.map((beach) => () {
-        if (beach.toLowerCase().contains(this.searchText.toLowerCase())) {
-          searchList.add(beach);
+
+      this.beachList.forEach((beachName) {
+        if (beachName.toLowerCase().contains(searchText.toLowerCase())) {
+          searchList.add(beachName);
         }
       });
       return searchList.map((contact) => BeachListItem(beachName: contact, region: this.beaches[contact], beachState: this)).toList();

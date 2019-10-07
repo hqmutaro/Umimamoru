@@ -18,7 +18,10 @@ class UmimamoruTheme extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: this.title,
-        theme: ThemeData(primaryColor: colorTheme),
+        theme: ThemeData(
+            primaryColor: colorTheme,
+            fontFamily: "SpicaNeue"
+        ),
         home: this.home
     );
   }
