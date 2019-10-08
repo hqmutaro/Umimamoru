@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umimamoru/presentation/config/dev_board.dart';
 import 'package:umimamoru/presentation/config/watching_view.dart';
 import 'package:umimamoru/presentation/umimamoru_theme.dart';
 import 'package:umimamoru/presentation/ui/button/previous_button.dart';
@@ -39,6 +40,18 @@ class _Config extends State<Config> {
                           ),
                           onTap: onWatching()
                       )
+                    ),
+                    Card(
+                        child: ListTile(
+                            leading: Icon(Icons.developer_board, color: Colors.pinkAccent),
+                            title: Text(
+                                "開発",
+                                style: TextStyle(
+                                    fontSize: 25.0
+                                )
+                            ),
+                            onTap: onDevBoard()
+                        )
                     )
                   ]
               )
@@ -50,6 +63,12 @@ class _Config extends State<Config> {
   Function onWatching() {
     return () {
       Navigator.push(context, MaterialPageRoute(builder: (context) => WatchingView()));
+    };
+  }
+
+  Function onDevBoard() {
+    return () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => DevBoard()));
     };
   }
 }
