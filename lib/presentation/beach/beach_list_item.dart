@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:umimamoru/infrastructure/repository/server_beach_repository.dart';
 import 'package:umimamoru/presentation/beach/main.dart';
@@ -32,6 +33,11 @@ class BeachListItem extends StatelessWidget {
         title: Text(this.beachName, style: TextStyle(fontSize: 25.0)),
         subtitle: Text(this.region, style: TextStyle(color: Colors.grey)),
         onTap: () async{
+          var connectivityResult = await (Connectivity().checkConnectivity());
+          if (connectivityResult == ConnectivityResult.none) {
+            notConnectedPopup(context);
+            return;
+          }
           var beach = await ServerBeachRepository().beachData(this.beachName);
           Navigator.push(
               context,
@@ -40,6 +46,24 @@ class BeachListItem extends StatelessWidget {
           this.beachState.handleSearchFinish();
         }
       )
+    );
+  }
+
+  void notConnectedPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: Text("ネットワークエラー"),
+          content: Text("インターネットに接続してください"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("OK"),
+              onPressed: () => Navigator.pop(context),
+            )
+          ]
+        );
+      }
     );
   }
 }
