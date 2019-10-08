@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'package:umimamoru/application/bloc/bloc_base.dart';
 import 'package:umimamoru/domain/beach.dart';
-import 'package:umimamoru/infrastructure/repository/server_occur_pole_repository.dart';
+import 'package:umimamoru/domain/pole.dart';
+import 'package:umimamoru/infrastructure/repository/server_pole_repository.dart';
+import 'package:umimamoru/domain/wave_speed.dart';
 
 class OccurPoleBloc extends BlocBase {
 
   StreamController<void> _startController = StreamController<void>();
-  StreamController<List<String>> _outputController = StreamController<List<String>>();
+  StreamController<List<Pole>> _outputController = StreamController<List<Pole>>();
 
   StreamSink<void> get start => _startController.sink;
-  Stream<List<String>> get output => _outputController.stream;
+  Stream<List<Pole>> get output => _outputController.stream;
 
   Beach beach;
 
@@ -20,11 +22,21 @@ class OccurPoleBloc extends BlocBase {
 
   void _start() {
     var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
-      return await ServerOccurPoleRepository().occurState(this.beach);
+      return await ServerPoleRepository().poleState(this.beach);
     });
-    stream.listen((result) => result.then((occurPole) {
-      _outputController.sink.add(occurPole.cones);
+    stream.listen((result) => result.then((poleList) {
+      _outputController.sink.add(getOccurPoles(poleList));
     }));
+  }
+
+  List<Pole> getOccurPoles(List<Pole> poleList) {
+    var occurPoleList = <Pole>[];
+    poleList.forEach((pole) {
+      if (getLevel(pole.speed) == Level.Fast) {
+        occurPoleList.add(pole);
+      }
+    });
+    return occurPoleList;
   }
 
   @override
