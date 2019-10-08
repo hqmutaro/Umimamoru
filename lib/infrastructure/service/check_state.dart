@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:umimamoru/application/Debug.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/image_action_bloc.dart';
 import 'package:umimamoru/domain/module.dart';
@@ -31,6 +32,7 @@ class CheckState {
   void checkState() async{
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) return;
+    if (Debug.isDebugMode()) return;
     var provider = WatchProvider.getInstance();
     var watchBeaches = await provider.getWatchBeaches();
     watchBeaches.forEach((beach) => this.run(beach));
