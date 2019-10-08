@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:umimamoru/application/Debug.dart';
+import 'package:umimamoru/application/debug.dart';
 import 'package:umimamoru/domain/beach.dart';
 
 import 'package:umimamoru/domain/module.dart';
@@ -32,16 +32,16 @@ class ServerModuleRepository implements ModuleRepository {
         url + "/net/module?net=$net",
         headers: {"Content-Type": "application/json"}
     );
-    List moduleDataList = json.decode(moduleResponse.body);
+    var moduleDataList = json.decode(moduleResponse.body) as List;
     //print(moduleDataList.first["latitude"]);
 
-    var moduleStateList = <Module>[];
+    var moduleList = <Module>[];
     //print("moduledata: $moduleDataList");
     for (Map<String, dynamic> moduleData in moduleDataList) {
       var module = await moduleListed(net, url, moduleData);
-      moduleStateList.add(module);
+      moduleList.add(module);
     }
-    return moduleStateList;
+    return moduleList;
   }
 
   Future<Module> moduleListed(int net, String url, Map<String, dynamic> map) async {
@@ -49,8 +49,8 @@ class ServerModuleRepository implements ModuleRepository {
         url + "/net/flow?net=$net",
         headers: {"Content-Type": "application/json"}
     );
-    List flowDataList = json.decode(flowResponse.body);
-    Map flowData = flowDataList[map["loc"] - 1]["flow"];
+    var flowDataList = json.decode(flowResponse.body) as List;
+    var flowData = flowDataList[map["loc"] - 1]["flow"] as Map;
     return ModuleDTO.decode(<String, dynamic>{
       "loc": map["loc"],
       "wave.level": getLevelToString(getLevel(flowData["flow"])),

@@ -1,4 +1,4 @@
-import 'package:umimamoru/application/Debug.dart';
+import 'package:umimamoru/application/debug.dart';
 import 'package:umimamoru/domain/beach.dart';
 import 'package:umimamoru/domain/repository/beach_repository.dart';
 import 'dart:convert' as convert;

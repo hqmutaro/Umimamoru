@@ -13,14 +13,14 @@ class ModuleDTO {
     );
   }
 
-  static Map<String, dynamic> encode(Module coneState) {
+  static Map<String, dynamic> encode(Module module) {
     return <String, dynamic>{
-      "id" : coneState.id,
-      "waveLevel" : coneState.level,
-      "waveSpeed" : coneState.speed,
-      // "countOccur" : coneState.countOccur,
-      "latitude" : coneState.latitude,
-      "longitude" : coneState.longitude
+      "id" : module.id,
+      "waveLevel" : module.level,
+      "waveSpeed" : module.speed,
+      "countOccur" : module.countOccur,
+      "latitude" : module.latitude,
+      "longitude" : module.longitude
     };
   }
 }

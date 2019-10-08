@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umimamoru/application/Debug.dart';
+import 'package:umimamoru/application/debug.dart';
 import 'package:umimamoru/infrastructure/service/occurring_manager.dart';
 import 'package:umimamoru/infrastructure/service/server_request.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
@@ -9,9 +9,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 void main() async{
-  // Debug Mode
-  Debug.setDebugMode();
-
   await WatchProvider().init();
   await OccurringManager().init();
   var provider = WatchProvider.getInstance();
