@@ -7,8 +7,13 @@ class ServerProvider {
   Future<http.Response> response(String path, String param) async{
     return await http.get(
         url + path + param,
-        headers: {"Content-Type": "application/json"}
+        headers: {"content-type": "application/json"}
     );
+  }
+
+  Future<bool> isActivity() async{
+    var response = await http.get(url, headers: {"content-type": "application/json"});
+    return response != null;
   }
 
   String get url => _url;
