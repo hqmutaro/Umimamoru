@@ -1,6 +1,8 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:umimamoru/application/debug.dart';
 import 'package:umimamoru/infrastructure/repository/server_beach_repository.dart';
+import 'package:umimamoru/infrastructure/repository/server_provider.dart';
 import 'package:umimamoru/presentation/beach/main.dart';
 import 'package:umimamoru/domain/beach.dart' as beach;
 import 'package:umimamoru/presentation/display/main.dart';
@@ -34,12 +36,20 @@ class BeachListItem extends StatelessWidget {
         title: Text(this.beachName, style: TextStyle(fontSize: 25.0)),
         subtitle: Text(this.region, style: TextStyle(color: Colors.grey)),
         onTap: () async{
-          var connectivityResult = await Connectivity().checkConnectivity();
-          if (connectivityResult == ConnectivityResult.none) {
-            notConnectedPopup(context);
-            return;
-          }
           progressDialog(context);
+          if (!Debug.isDebugMode()) {
+            var connectivityResult = await Connectivity().checkConnectivity();
+            if (connectivityResult == ConnectivityResult.none) {
+              Navigator.pop(context);
+              notConnectedPopup(context);
+              return;
+            }
+            if (!await ServerProvider().isActivity()) {
+              Navigator.pop(context);
+              notActivityPopup(context);
+              return;
+            }
+          }
           var beach = await ServerBeachRepository().beachData(this.beachName);
           Navigator.pop(context);
           Navigator.push(
@@ -49,6 +59,24 @@ class BeachListItem extends StatelessWidget {
           this.beachState.handleSearchFinish();
         }
       )
+    );
+  }
+
+  void notActivityPopup(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+              title: Text("サーバエラー"),
+              content: Text("サーバがダウンしています。\n復旧までしばらくお待ちください。"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("OK"),
+                  onPressed: () => Navigator.pop(context),
+                )
+              ]
+          );
+        }
     );
   }
 
