@@ -70,6 +70,21 @@ class BeachListItem extends StatelessWidget {
                         Container(
                             margin: EdgeInsets.all(10.0),
                             child: Text("読み込み中...")
+                        ),
+                        RaisedButton(
+                          onPressed: () => Navigator.pop(context),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          color: Colors.blue[800],
+                          child: Text(
+                            "キャンセル",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0,
+                            )
+                          )
                         )
                       ]
                   )
