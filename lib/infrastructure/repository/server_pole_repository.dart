@@ -6,6 +6,7 @@ import 'package:umimamoru/domain/beach.dart';
 import 'package:umimamoru/domain/repository/pole_repository.dart';
 import 'package:umimamoru/infrastructure/repository/dto/pole_dto.dart';
 import 'package:http/http.dart' as http;
+import 'package:umimamoru/infrastructure/repository/server_provider.dart';
 
 class ServerPoleRepository implements PoleRepository {
 
@@ -16,29 +17,22 @@ class ServerPoleRepository implements PoleRepository {
         PoleDTO.debug()
       ];
     }
-    var url = "http://35.247.121.242:8080/Umimamoru/umimamoru";
-    var net = beach.net;
-    var poleResponse = await http.get(
-      url + "/net/pole?net=$net",
-      headers: {"Content-Type": "application/json"}
-    );
+    var poleResponse = await ServerProvider().response("/net/pole", "?net=${beach.net}");
     var poleDataList = json.decode(poleResponse.body) as List;
 
     var poleList = <Pole>[];
     for (Map<String, dynamic> poleData in poleDataList) {
-      var pole = await poleListed(net, url, poleData);
+      var pole = await poleListed(beach.net, poleData);
       poleList.add(pole);
     }
     return poleList;
   }
 
-  Future<Pole> poleListed(int net, String url, Map<String, dynamic> map) async{
-    var flowResponse = await http.get(
-      url + "/pole/flow?loc=${map["loc"]}&net=$net",
-      headers: {"Content-Type": "application/json"}
-    );
+  Future<Pole> poleListed(int net, Map<String, dynamic> map) async{
+    var flowResponse = await ServerProvider().response("/pole/flow", "?loc=${map["loc"]}&net=$net");
     var flowDataList = json.decode(flowResponse.body) as List;
     var flowData = flowDataList.first as Map;
+
     return PoleDTO.decode(<String, dynamic>{
       "net": flowData["flow"]["net"],
       "loc": flowData["flow"]["loc"],

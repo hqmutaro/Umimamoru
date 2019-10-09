@@ -7,6 +7,8 @@ import 'package:umimamoru/domain/beach.dart';
 import 'package:umimamoru/domain/module.dart';
 import 'package:umimamoru/domain/repository/module_repository.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
+import 'package:umimamoru/infrastructure/repository/server_pole_repository.dart';
+import 'package:umimamoru/infrastructure/repository/server_provider.dart';
 
 import 'dto/module_dto.dart';
 
@@ -26,31 +28,22 @@ class ServerModuleRepository implements ModuleRepository {
         })
       ];
     }
-    var url = "http://35.247.121.242:8080/Umimamoru/umimamoru";
-    var net = beach.net;
-    var moduleResponse = await http.get(
-        url + "/net/module?net=$net",
-        headers: {"Content-Type": "application/json"}
-    );
+    var moduleResponse = await ServerProvider().response("/net/module", "?net=${beach.net}");
     var moduleDataList = json.decode(moduleResponse.body) as List;
-    //print(moduleDataList.first["latitude"]);
 
     var moduleList = <Module>[];
-    //print("moduledata: $moduleDataList");
     for (Map<String, dynamic> moduleData in moduleDataList) {
-      var module = await moduleListed(net, url, moduleData);
+      var module = await moduleListed(beach.net, moduleData);
       moduleList.add(module);
     }
     return moduleList;
   }
 
-  Future<Module> moduleListed(int net, String url, Map<String, dynamic> map) async {
-    var flowResponse = await http.get(
-        url + "/net/flow?net=$net",
-        headers: {"Content-Type": "application/json"}
-    );
+  Future<Module> moduleListed(int net, Map<String, dynamic> map) async {
+    var flowResponse = await ServerProvider().response("/net/flow", "?net=$net");
     var flowDataList = json.decode(flowResponse.body) as List;
     var flowData = flowDataList[map["loc"] - 1]["flow"] as Map;
+
     return ModuleDTO.decode(<String, dynamic>{
       "loc": map["loc"],
       "wave.level": getLevelToString(getLevel(flowData["flow"])),
