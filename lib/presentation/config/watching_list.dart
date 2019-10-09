@@ -118,9 +118,20 @@ class _WatchingList extends State<WatchingList> {
               title: Text("サーバエラー"),
               content: Text("サーバがダウンしています。\n復旧までしばらくお待ちください。"),
               actions: <Widget>[
-                FlatButton(
-                  child: Text("OK"),
-                  onPressed: () => Navigator.pop(context),
+                RaisedButton(
+                    onPressed: () => Navigator.pop(context),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    ),
+                    color: Colors.blue[800],
+                    child: Text(
+                        "OK",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        )
+                    )
                 )
               ]
           );
@@ -178,10 +189,21 @@ class _WatchingList extends State<WatchingList> {
               title: Text("ネットワークエラー"),
               content: Text("インターネットに接続してください"),
               actions: <Widget>[
-                FlatButton(
-                  child: Text("OK"),
+                RaisedButton(
                   onPressed: () => Navigator.pop(context),
-                )
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  ),
+                  color: Colors.blue[800],
+                  child: Text(
+                      "OK",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      )
+                  )
+              )
               ]
           );
         }
