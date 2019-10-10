@@ -15,8 +15,10 @@ class BeachListItem extends StatelessWidget {
   final String region;
 
   final BeachState beachState;
+
+  bool isCanceled = false;
   
-  const BeachListItem({
+  BeachListItem({
     @required this.beachName,
     @required this.region,
     @required this.beachState
@@ -40,23 +42,28 @@ class BeachListItem extends StatelessWidget {
           if (!Debug.isDebugMode()) {
             var connectivityResult = await Connectivity().checkConnectivity();
             if (connectivityResult == ConnectivityResult.none) {
+              print("Not Connection");
               Navigator.pop(context);
               notConnectedPopup(context);
               return;
             }
-            if (!await ServerProvider().isActivity()) {
+            var isActivity = await ServerProvider().isActivity();
+            print("Server Activity: $isActivity");
+            if (!isActivity) {
               Navigator.pop(context);
               notActivityPopup(context);
               return;
             }
           }
-          var beach = await ServerBeachRepository().beachData(this.beachName);
-          Navigator.pop(context);
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => DisplayHome(beach: beach))
-          );
-          this.beachState.handleSearchFinish();
+          if (!this.isCanceled) {
+            var beach = await ServerBeachRepository().beachData(this.beachName);
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DisplayHome(beach: beach))
+            );
+            this.beachState.handleSearchFinish();
+          }
         }
       )
     );
@@ -111,7 +118,10 @@ class BeachListItem extends StatelessWidget {
                             child: Text("読み込み中...")
                         ),
                         RaisedButton(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () {
+                            this.isCanceled = true;
+                            Navigator.pop(context);
+                          },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30.0)),
                           ),
