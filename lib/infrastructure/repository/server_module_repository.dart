@@ -7,7 +7,6 @@ import 'package:umimamoru/domain/beach.dart';
 import 'package:umimamoru/domain/module.dart';
 import 'package:umimamoru/domain/repository/module_repository.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
-import 'package:umimamoru/infrastructure/repository/server_pole_repository.dart';
 import 'package:umimamoru/infrastructure/repository/server_provider.dart';
 
 import 'dto/module_dto.dart';

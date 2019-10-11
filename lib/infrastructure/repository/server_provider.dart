@@ -11,9 +11,28 @@ class ServerProvider {
     );
   }
 
+  /*
   Future<bool> isActivity() async{
     var response = await http.get(url, headers: {"content-type": "application/json"});
     return response != null;
+  }
+
+   */
+
+  Future<bool> isActivity() {
+    return http.get(url + "/net?net=0")
+        .then((response) {
+          print(response);
+          if (response == null) return false;
+          var statusCode = response.statusCode;
+          print("StatusCode: $statusCode");
+          if (statusCode != 200) {
+            return false;
+          }
+       return true;
+    }).catchError((error) {
+      return false;
+    });
   }
 
   String get url => _url;
