@@ -5,12 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/module_bloc.dart';
+import 'package:umimamoru/domain/beach.dart';
 import 'package:umimamoru/domain/module.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader3.dart';
 
 class MapState extends StatefulWidget {
+
+  final Beach beach;
+
+  MapState({@required this.beach}) : assert(beach != null);
 
   @override
   _MapState createState() => _MapState();
@@ -19,11 +24,12 @@ class MapState extends StatefulWidget {
 class _MapState extends  State<MapState> {
 
   Completer<GoogleMapController> _controller = Completer();
-  final LatLng _center = const LatLng(26.512094, 128.028253);
+  LatLng _center;
 
   @override
   void initState() {
     super.initState();
+    this._center = LatLng(widget.beach.latitude, widget.beach.longitude);
   }
 
   void _onMapCreated(GoogleMapController controller) {

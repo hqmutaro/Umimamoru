@@ -77,7 +77,7 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
           Display(beach: widget.beach),
           BlocProvider<ModuleBloc>(
               bloc: ModuleBloc(widget.beach),
-              child: MapState()
+              child: MapState(beach: widget.beach)
           )
         ]
         )
