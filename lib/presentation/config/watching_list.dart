@@ -10,6 +10,7 @@ import 'package:umimamoru/infrastructure/repository/server_provider.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
 import 'package:umimamoru/presentation/display/main.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader3.dart';
+import 'package:umimamoru/presentation/ui/dialog/not_activity_popup.dart';
 
 class WatchingList extends StatefulWidget {
 
@@ -20,6 +21,7 @@ class WatchingList extends StatefulWidget {
 class _WatchingList extends State<WatchingList> {
 
   Map<String, bool> isDeleted = {};
+  bool isCanceled = false;
 
   @override
   void initState() {
@@ -95,48 +97,24 @@ class _WatchingList extends State<WatchingList> {
           notConnectedPopup(context);
           return;
         }
-        if (!await ServerProvider().isActivity()) {
+        var isActivity = await ServerProvider().isActivity();
+        print("Server Activity: $isActivity");
+        if (!isActivity) {
           Navigator.pop(context);
           notActivityPopup(context);
           return;
         }
       }
-      var beach = await ServerBeachRepository().beachData(beachName);
-      Navigator.pop(context);
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DisplayHome(beach: beach))
-      );
+      if (!this.isCanceled) {
+        var beach = await ServerBeachRepository().beachData(beachName);
+        Navigator.pop(context);
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DisplayHome(beach: beach))
+        );
+      }
+      this.isCanceled = false;
     };
-  }
-
-  void notActivityPopup(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return AlertDialog(
-              title: Text("サーバエラー"),
-              content: Text("サーバがダウンしています。\n復旧までしばらくお待ちください。"),
-              actions: <Widget>[
-                RaisedButton(
-                    onPressed: () => Navigator.pop(context),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    ),
-                    color: Colors.blue[800],
-                    child: Text(
-                        "OK",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                        )
-                    )
-                )
-              ]
-          );
-        }
-    );
   }
 
   void progressDialog(BuildContext context) {
@@ -159,7 +137,10 @@ class _WatchingList extends State<WatchingList> {
                             child: Text("読み込み中...")
                         ),
                         RaisedButton(
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              this.isCanceled = true;
+                            },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(30.0)),
                             ),

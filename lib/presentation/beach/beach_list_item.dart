@@ -4,9 +4,9 @@ import 'package:umimamoru/application/debug.dart';
 import 'package:umimamoru/infrastructure/repository/server_beach_repository.dart';
 import 'package:umimamoru/infrastructure/repository/server_provider.dart';
 import 'package:umimamoru/presentation/beach/main.dart';
-import 'package:umimamoru/domain/beach.dart' as beach;
 import 'package:umimamoru/presentation/display/main.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader3.dart';
+import 'package:umimamoru/presentation/ui/dialog/not_activity_popup.dart';
 
 @immutable
 class BeachListItem extends StatelessWidget {
@@ -64,37 +64,9 @@ class BeachListItem extends StatelessWidget {
             );
             this.beachState.handleSearchFinish();
           }
+          this.isCanceled = false;
         }
       )
-    );
-  }
-
-  void notActivityPopup(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return AlertDialog(
-              title: Text("サーバエラー"),
-              content: Text("サーバがダウンしています。\n復旧までしばらくお待ちください。"),
-              actions: <Widget>[
-                RaisedButton(
-                    onPressed: () => Navigator.pop(context),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    ),
-                    color: Colors.blue[800],
-                    child: Text(
-                        "OK",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                        )
-                    )
-                )
-              ]
-          );
-        }
     );
   }
 
@@ -119,8 +91,8 @@ class BeachListItem extends StatelessWidget {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            this.isCanceled = true;
                             Navigator.pop(context);
+                            this.isCanceled = true;
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30.0)),

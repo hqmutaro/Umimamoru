@@ -1,7 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:umimamoru/application/Debug.dart';
+import 'package:umimamoru/application/debug.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/image_action_bloc.dart';
 import 'package:umimamoru/domain/module.dart';
