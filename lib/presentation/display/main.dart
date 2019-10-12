@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/module_bloc.dart';
 import 'package:umimamoru/domain/beach.dart';
+import 'package:umimamoru/infrastructure/service/server_request.dart';
 import 'package:umimamoru/presentation/display/display.dart';
 import 'package:umimamoru/presentation/display/state/map_state.dart';
 
@@ -30,6 +31,7 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
   @override
   void initState() {
     super.initState();
+    this.startServerRequest();
     controller = TabController(length: 2, vsync: this);
   }
 
@@ -53,6 +55,13 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
       ],
       controller: controller,
     );
+  }
+
+  void startServerRequest() {
+    var request = ServerRequest();
+    Stream.periodic(const Duration(seconds: 5), (count) async{
+      request.request(widget.beach.name);
+    });
   }
 
   TabBarView getTabBarView(var tabs) {

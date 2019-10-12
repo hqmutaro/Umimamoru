@@ -44,7 +44,7 @@ class CheckState {
     this._isOccurring = await this._occurringManager.isOccurring(beach);
     this._beach = beach;
     var beachData = await ServerBeachRepository().beachData(beach);
-    var moduleList = await this._serverModuleRepository.moduleState(beachData);
+    var moduleList = await this._serverModuleRepository.moduleState(beachData.name);
 
     moduleList.forEach((model) => this.checkOccurring(model)); // 離岸流の発生判定を行う
     moduleList.forEach((model) => this.sendNotification(model)); // 条件を判定しながら通知を行う

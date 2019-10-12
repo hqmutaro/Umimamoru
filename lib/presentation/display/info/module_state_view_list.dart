@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/module_bloc.dart';
+import 'package:umimamoru/infrastructure/repository/server_beach_repository.dart';
+import 'package:umimamoru/infrastructure/repository/server_module_repository.dart';
 import 'package:umimamoru/presentation/display/state/state_color.dart';
 import 'package:umimamoru/presentation/display/info/module_state_view.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
@@ -32,6 +34,19 @@ class ModuleStateViewList extends StatelessWidget {
        }
      );
   }
+
+  /*
+  Future<List<Widget>> getInitCards() async{
+    var widgets = <Widget>[];
+    var beach = await ServerBeachRepository().beachData(this.beach);
+    var moduleList = await ServerModuleRepository().moduleState(beach);
+    moduleList.forEach((module) {
+      widgets.add(ModuleStateView(module: module.id.toString(), entity: module));
+    });
+    return widgets;
+  }
+
+   */
 
   List<Widget> getCards(List<Widget> widgets, int cones) {
     if (cones == 0) {

@@ -1,8 +1,11 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/debug.dart';
+import 'package:umimamoru/domain/repository/beach_repository.dart';
 import 'package:umimamoru/infrastructure/repository/server_beach_repository.dart';
 import 'package:umimamoru/infrastructure/repository/server_provider.dart';
+import 'package:umimamoru/infrastructure/service/data_holder.dart';
+import 'package:umimamoru/infrastructure/service/server_request.dart';
 import 'package:umimamoru/presentation/beach/main.dart';
 import 'package:umimamoru/presentation/display/main.dart';
 import 'package:umimamoru/presentation/ui/loader/color_loader3.dart';
@@ -56,8 +59,9 @@ class BeachListItem extends StatelessWidget {
             }
           }
           if (!this.isCanceled) {
-            var beach = await ServerBeachRepository().beachData(this.beachName);
+            await ServerRequest().request(beachName);
             Navigator.pop(context);
+            var beach = await ServerBeachRepository().beachData(beachName);
             Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => DisplayHome(beach: beach))

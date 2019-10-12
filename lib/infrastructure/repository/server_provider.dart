@@ -31,6 +31,7 @@ class ServerProvider {
           }
        return true;
     }).catchError((error) {
+      print(error);
       return false;
     });
   }

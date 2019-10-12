@@ -22,7 +22,7 @@ class ImageActionBloc extends BlocBase {
   void _start() {
     bool isOccurring = false;
     var repository = ServerModuleRepository();
-    repository.moduleState(this.beach).then((repository) {
+    repository.moduleState(this.beach.name).then((repository) {
       repository.forEach((module) {
         if (module.level == getLevelToString(Level.Fast)) {
           isOccurring = true;
