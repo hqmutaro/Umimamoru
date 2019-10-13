@@ -30,7 +30,7 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
   TabController controller;
 
   _DisplayHome() {
-    this.serverRequest();
+    //this.serverRequest();
   }
 
   @override
@@ -68,15 +68,6 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
       // set the controller
       controller: controller,
     );
-  }
-
-  Future<void> serverRequest() async{
-    var connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult != ConnectivityResult.none) {
-      var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
-        return await ServerRequest().request(widget.beach.name);
-      });
-    }
   }
 
   @override

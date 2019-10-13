@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/image_action_bloc.dart';
 import 'package:umimamoru/application/bloc/watching_bloc.dart';
 import 'package:umimamoru/domain/beach.dart';
+import 'package:umimamoru/infrastructure/service/server_request.dart';
 import 'package:umimamoru/presentation/display/state/map_state.dart';
 import 'package:umimamoru/presentation/display/state/watching_button.dart';
 import 'package:umimamoru/presentation/umimamoru_theme.dart';
@@ -31,6 +34,14 @@ class Display extends StatefulWidget {
 }
 
 class _Display extends State<Display> {
+
+  Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    this.serverRequest().then((timer) => _timer = timer);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,5 +88,18 @@ class _Display extends State<Display> {
         child: WatchingButton(beach: widget.beach.name)
       )
     );
+  }
+
+  Future<Timer> serverRequest() async{
+    var serverRequest = ServerRequest();
+    return Timer.periodic(const Duration(seconds: 5), (Timer t) async{
+      await serverRequest.request(widget.beach.name);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
   }
 }
