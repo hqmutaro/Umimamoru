@@ -1,8 +1,10 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/module_bloc.dart';
 import 'package:umimamoru/domain/beach.dart';
+import 'package:umimamoru/infrastructure/service/server_request.dart';
 import 'package:umimamoru/presentation/display/display.dart';
 import 'package:umimamoru/presentation/display/state/map_state.dart';
 
@@ -26,6 +28,10 @@ class DisplayHome extends StatefulWidget {
 class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixin {
 
   TabController controller;
+
+  _DisplayHome() {
+    this.serverRequest();
+  }
 
   @override
   void initState() {
@@ -62,6 +68,15 @@ class _DisplayHome extends State<DisplayHome> with SingleTickerProviderStateMixi
       // set the controller
       controller: controller,
     );
+  }
+
+  Future<void> serverRequest() async{
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult != ConnectivityResult.none) {
+      var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
+        return await ServerRequest().request(widget.beach.name);
+      });
+    }
   }
 
   @override

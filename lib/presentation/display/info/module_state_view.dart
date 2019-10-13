@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:umimamoru/domain/wave_speed.dart';
 import 'package:umimamoru/presentation/display/state/state_color.dart';
 import 'package:umimamoru/domain/module.dart';
+import 'package:umimamoru/domain/wave_direction.dart';
 
 class ModuleStateView extends StatelessWidget {
 
