@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -6,8 +8,11 @@ import 'package:umimamoru/application/bloc/bloc_provider.dart';
 import 'package:umimamoru/application/bloc/image_action_bloc.dart';
 import 'package:umimamoru/domain/module.dart';
 import 'package:umimamoru/domain/repository/beach_repository.dart';
+import 'package:umimamoru/infrastructure/repository/dto/beach_dto.dart';
+import 'package:umimamoru/infrastructure/repository/dto/module_dto.dart';
 import 'package:umimamoru/infrastructure/repository/server_beach_repository.dart';
 import 'package:umimamoru/infrastructure/repository/server_module_repository.dart';
+import 'package:umimamoru/infrastructure/repository/server_provider.dart';
 import 'package:umimamoru/infrastructure/service/occurring_manager.dart';
 import 'package:umimamoru/infrastructure/service/watch_provider.dart';
 import 'package:umimamoru/domain/wave_speed.dart';
@@ -43,14 +48,44 @@ class CheckState {
     this._isOccurringBeach = false;
     this._isOccurring = await this._occurringManager.isOccurring(beach);
     this._beach = beach;
-    var beachData = await ServerBeachRepository().beachData(beach);
-    var moduleList = await this._serverModuleRepository.moduleState(beachData);
+    var serverProvider = ServerProvider();
+
+    var beachResponse = await serverProvider.response("/net/beach", "?beach=$beach");
+    var beachDataList = json.decode(beachResponse.body) as List;
+    Map<String, dynamic> beachMap = beachDataList.first;
+    var beachData = BeachDTO.decode(beachMap);
+
+    var moduleResponse = await serverProvider.response("/net/module", "?net=${beachMap["net"]}");
+    var moduleDataList = json.decode(moduleResponse.body) as List;
+    var moduleListMap = <String, dynamic>{};
+
+    for (Map<String, dynamic> moduleData in moduleDataList) {
+      var module = await moduleListed(beachMap["net"], moduleData);
+      moduleListMap[module["loc"].toString()] = ModuleDTO.decode(module);
+    }
+    var moduleList = moduleListMap.values.toList();
 
     moduleList.forEach((model) => this.checkOccurring(model)); // 離岸流の発生判定を行う
     moduleList.forEach((model) => this.sendNotification(model)); // 条件を判定しながら通知を行う
     if ((!this._isOccurringBeach) && (this._isOccurring)) {
       await this._occurringManager.deleteOccurring(beach);
     }
+  }
+
+  Future<Map<String, dynamic>> moduleListed(int net, Map<String, dynamic> map) async{
+    var flowResponse = await ServerProvider().response("/net/flow", "?net=$net");
+    //print(flowResponse.body);
+    var flowDataList = json.decode(flowResponse.body) as List;
+    print("flow $flowDataList");
+    var flowData = flowDataList.first["flow"] as Map;
+    return <String, dynamic>{
+      "loc": map["loc"],
+      "wave.level": getLevelToString(getLevel(flowData["flow"])),
+      "wave.speed": double.parse(flowData["flow"].toStringAsFixed(1)),
+      "count.occur": flowDataList[0],
+      "latitude": map["latitude"],
+      "longitude": map["longitude"]
+    };
   }
 
   Future<void> checkOccurring(Module model) async{
