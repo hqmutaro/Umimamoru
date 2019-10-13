@@ -11,14 +11,6 @@ class ServerProvider {
     );
   }
 
-  /*
-  Future<bool> isActivity() async{
-    var response = await http.get(url, headers: {"content-type": "application/json"});
-    return response != null;
-  }
-
-   */
-
   Future<bool> isActivity() {
     return http.get(url + "/net?net=0")
         .then((response) {
