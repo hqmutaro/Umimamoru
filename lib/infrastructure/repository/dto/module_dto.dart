@@ -3,11 +3,12 @@ import 'package:umimamoru/domain/module.dart';
 class ModuleDTO {
 
   static Module decode(Map<String, dynamic> map) {
+    print("Map $map");
     return Module(
       map["loc"] as num,
-      map["wave.level"],
+      map["wave.level"] as String,
       map["wave.speed"] as num,
-      map["count.occur"] as num,
+      map["count.occur"]["count"] as num,
       map["latitude"] as num,
       map["longitude"] as num
     );
@@ -22,5 +23,16 @@ class ModuleDTO {
       "latitude" : module.latitude,
       "longitude" : module.longitude
     };
+  }
+
+  static Module debug() {
+    return Module(
+      1,
+      "Fast",
+      1.7,
+      4,
+      24,
+      150
+    );
   }
 }
