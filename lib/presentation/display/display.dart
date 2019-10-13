@@ -45,8 +45,8 @@ class _Display extends State<Display> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                  widget.beach.pref + "名護市辺野古豊原\n" +
-                  widget.beach.name + "の海流のようす",
+                  widget.beach.pref + widget.beach.city + widget.beach.ward + "\n"
+                  + widget.beach.name + "の海流のようす",
                   style: TextStyle(
                     fontSize: 23.0,
                     fontWeight: FontWeight.bold
@@ -58,7 +58,6 @@ class _Display extends State<Display> {
                   child: ImageActionView(beach: widget.beach.name)
               ),
               Header(title: "離岸流が発生している場所"),
-              // TODO: モジュールではなく、ポールを列挙する
               BlocProvider<OccurPoleBloc>(
                   bloc: OccurPoleBloc(widget.beach),
                   child: OccurPoleView(beach: widget.beach.name)

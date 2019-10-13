@@ -47,7 +47,8 @@ class BeachState extends State<Beach> {
     super.initState();
     this.isSearching = false;
     this.beaches = {
-      "シーグラスビーチ": "沖縄県名護市辺野古豊原"
+      "シーグラスビーチ": "沖縄県名護市辺野古豊原",
+      "プロコン本戦": "宮崎県都城市北原町"
     };
     this.beachList = this.beaches.keys.toList();
   }
