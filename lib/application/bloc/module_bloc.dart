@@ -22,7 +22,7 @@ class ModuleBloc extends BlocBase {
   void _start() {
     ServerModuleRepository repository = ServerModuleRepository();
     var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
-      List<Module> moduleState = await repository.moduleState(this.beach);
+      List<Module> moduleState = await repository.moduleState(this.beach.name);
       return moduleState;
     });
     stream.listen((result) => result.then((moduleState) {

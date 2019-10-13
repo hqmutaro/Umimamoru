@@ -22,7 +22,7 @@ class OccurPoleBloc extends BlocBase {
 
   void _start() {
     var stream = Stream.periodic(const Duration(seconds: 5), (count) async{
-      return await ServerPoleRepository().poleState(this.beach);
+      return await ServerPoleRepository().poleState(this.beach.name);
     });
     stream.listen((result) => result.then((poleList) {
       _outputController.sink.add(getOccurPoles(poleList));
