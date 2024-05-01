@@ -16,6 +16,7 @@
 また、海水浴場の離岸流発生を監視することができ、離岸流が発生した場合は通知されます。
 ## スクリーンショット
 <img width="301" alt="sample_view" src="https://github.com/hqmutaro/Umimamoru/assets/39296516/4f651363-3336-4106-a5be-7b05c5cc6e2a">
+
 ## To Dev
 DDDを学習しながら作ったDDDもどき設計のモバイルアプリです。
 レイヤーの中身はゴチャゴチャなので、至らぬ点があればPR、issueしていただければ嬉しいです。
